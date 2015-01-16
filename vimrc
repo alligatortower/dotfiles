@@ -1,1 +1,0 @@
-/home/cweed/.vimrc
