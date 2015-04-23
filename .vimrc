@@ -1,3 +1,13 @@
+call plug#begin('~/.vim/plugged')
+Plug 'scrooloose/syntastic'
+Plug 'haya14busa/incsearch.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'altercation/vim-colors-solarized'
+Plug 'nvie/vim-flake8'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+call plug#end()
 syntax enable
 
 set background=dark
@@ -23,5 +33,5 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 :inoremap jk <ESC>
 
-execute pathogen#infect()
 autocmd BufWritePost *.py call Flake8()
+
