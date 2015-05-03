@@ -31,19 +31,22 @@ snippet with
 	with ${1:expr} as ${2:var}:
 		${0}
 # New Class
-snippet cl
+snippet class
 	class ${1:ClassName}(${2:object}):
 		"""${3:docstring for $1}"""
 		def __init__(self, ${4:arg}):
 			${5:super($1, self).__init__()}
 			self.$4 = $4
 			${0}
+snippet cl
+	class ${1:ClassName}(${2:object}):
+		${0}
 # New Function
-snippet def
+snippet deff
 	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
 		"""${3:docstring for $1}"""
 		${0}
-snippet deff
+snippet def
 	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
 		${0}
 # New Method
@@ -222,3 +225,7 @@ snippet kwargs
 	**kwargs${1:,}${0}
 snippet akw
 	*args, **kwargs${1:,}${0}
+	
+# lazytext
+snippet lt
+	_('${1}')${2}
