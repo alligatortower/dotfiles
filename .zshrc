@@ -7,6 +7,11 @@ export ZSH=/home/cweed/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="blinks"
 
+# use dir_colors
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+autoload -Uz compinit
+compinit
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
