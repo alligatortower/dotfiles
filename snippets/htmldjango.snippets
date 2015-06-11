@@ -1,3 +1,4 @@
+extends html
 # Generic tags
 
 snippet %
@@ -15,9 +16,9 @@ snippet autoescape
 		${0}
 	{% endautoescape %}
 snippet block
-	{% block ${1} %}
+	{% block ${1:blockname} %}
 		${0}
-	{% endblock %}
+	{% endblock $1 %}
 snippet #
 	{# ${0:comment} #}
 snippet comment
