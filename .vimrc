@@ -1,3 +1,6 @@
+"""""""""""
+" PLUGINS "
+"""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'altercation/vim-colors-solarized'
@@ -16,40 +19,25 @@ Plug 'pytest.vim'
 Plug 'commentary.vim'
 Plug 'bling/vim-airline'
 Plug 'fmoralesc/vim-pad'
+Plug 'rking/ag.vim'
 call plug#end()
 syntax enable
 
-"colorscheme
-"set color based on time of day
-" let hour = strftime("%H")
-" if 6 <= hour && hour < 20
-"     set background=dark
-" else
-"     set background=light
-" endif
 
+""""""""""""""""""
+" DISPLAY STUFFS "
+""""""""""""""""""
 set background=dark
 se t_Co=16
 colorscheme solarized
-
-"nerd tree start on empty vim
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"nerd tree close if it's the only thing open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-"airline configs
-let g:airline_exclude_preview = 0
-
-"vim-pad directory
-let g:pad#dir = '~/notes'
-
 "whitespace highlighting
 :hi ExtraWhitespace guibg=#990000 ctermbg=red
 
-"misc settings
+
+"""""""""""""""""
+" MISC SETTINGS "
+"""""""""""""""""
 set clipboard=unnamedplus
-set ignorecase
 set smartcase
 set incsearch
 set title
@@ -57,9 +45,11 @@ set numberwidth=1
 set hidden
 set hlsearch
 set laststatus=2
-set pastetoggle=<leader>p
 
-" spacing / styling
+
+"""""""""""""""""""""""""""""""
+" SPACING / FILETYPE SETTINGS "
+"""""""""""""""""""""""""""""""
 filetype indent plugin on
 filetype plugin on
 set tabstop=4 shiftwidth=4 expandtab
@@ -69,7 +59,10 @@ autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
 autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
 
-"""""""" keymaps """""""
+
+"""""""""""
+" KEYMAPS "
+"""""""""""
 let mapleader=";"
 "fastsave
 map <Esc><Esc> :w<CR>
@@ -106,5 +99,22 @@ map <F5> :set nornu<CR> :set nonu<CR>
 map <leader>t :NERDTreeToggle<CR>
 "open ctrlp
 map <leader>o :CtrlPMixed<CR>
+"paste toggle
+set pastetoggle=<F6>
 
+
+"""""""""""""""""""
+" PLUGIN SETTINGS "
+"""""""""""""""""""
+"nerd tree start on empty vim
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"nerd tree close if it's the only thing open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"nerd tree ignore filetypes
+let NERDTreeIgnore = ['\.pyc$']
+"airline configs
+let g:airline_exclude_preview = 0
+"vim-pad directory
+let g:pad#dir = '~/notes'
 autocmd BufWritePost *.py call Flake8()
