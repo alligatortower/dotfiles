@@ -20,6 +20,7 @@ Plug 'commentary.vim'
 Plug 'bling/vim-airline'
 Plug 'fmoralesc/vim-pad'
 Plug 'rking/ag.vim'
+Plug 'pelodelfuego/vim-swoop'
 call plug#end()
 syntax enable
 
@@ -55,6 +56,7 @@ filetype plugin on
 set tabstop=4 shiftwidth=4 expandtab
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype sass setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
 autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
