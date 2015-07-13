@@ -1,0 +1,19 @@
+Vim to learn:
+
+insert
+
+:r ![cmd / file] --> write stdout of cmd or file to buffer
+"gi" return to last insert
+"ctrl-n" autocomplete
+
+navigation
+
+"{number}gg" go to line
+"zt" cursor top
+"zb" cursor bottom
+"m{key}" bookmark cursor
+"`{key}" go to bookmark
+|zN<CR>|	z{height}<CR>	   redraw, make window {height} lines high
+|zf|		zf{motion}	   create a fold for Nmove text
+|za|		za		   open a closed fold, close an open fold
+<C-o> / <C-i> go back/forward in "jumps"

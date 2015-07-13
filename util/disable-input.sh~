@@ -1,0 +1,3 @@
+#!/bin/bash
+xinput disable "AT Translated Set 2 keyboard"
+xinput disable "SynPS/2 Synaptics TouchPad"

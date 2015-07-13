@@ -21,6 +21,7 @@ Plug 'bling/vim-airline'
 Plug 'fmoralesc/vim-pad'
 Plug 'rking/ag.vim'
 Plug 'pelodelfuego/vim-swoop'
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 syntax enable
 
@@ -60,6 +61,7 @@ autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
 autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
 
 
 """""""""""
@@ -81,16 +83,16 @@ map <leader>h :noh<CR>
 "map buffer tabbing
 map <leader>k :bn<CR>
 map <leader>j :bp<CR>
-"window resizing
-map <F8> <C-w>>
-map <S-F8> <C-w><
-map <F9> <C-w>+
-map <S-F9> <C-w>-
 "window navigation
 nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
+"window resizing
+map <F8> <C-w>>
+map <S-F8> <C-w><
+map <F9> <C-w>+
+map <S-F9> <C-w>-
 "change background color
 map <F2> :set background=dark<CR> :hi ExtraWhitespace guibg=#990000 ctermbg=red<CR>
 map <F3> :set background=light<CR> :hi ExtraWhitespace guibg=#990000 ctermbg=red<CR>
@@ -118,5 +120,5 @@ let NERDTreeIgnore = ['\.pyc$']
 "airline configs
 let g:airline_exclude_preview = 0
 "vim-pad directory
-let g:pad#dir = '~/notes'
+let g:pad#dir = '~/settings/notes'
 autocmd BufWritePost *.py call Flake8()
