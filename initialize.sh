@@ -1,7 +1,9 @@
+ln -s ~/settings/.zshrc ~/
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -s ~/settings/.vimrc ~/
+ln -s ~/settings/snippets ~/.vim/
 ln -s ~/settings/flake8 ~/.config
-ln -s settings/.vimrc ~/
-ln -s settings/.zshrc ~/
-ln -s snippets ~/.vim/
 
 cp util/disable-keyboard.sh /home/$(logname)/Desktop
 chmod +x /home/$(logname)/Desktop/disable-keyboard.sh

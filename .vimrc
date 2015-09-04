@@ -4,6 +4,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'altercation/vim-colors-solarized'
+Plug 'gilgigilgil/anderson.vim'
 Plug 'bling/vim-bufferline'
 Plug 'garbas/vim-snipmate'
 Plug 'haya14busa/incsearch.vim'
@@ -22,6 +23,7 @@ Plug 'fmoralesc/vim-pad'
 Plug 'rking/ag.vim'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'davidhalter/jedi-vim'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 syntax enable
 
@@ -29,9 +31,15 @@ syntax enable
 """"""""""""""""""
 " DISPLAY STUFFS "
 """"""""""""""""""
-set background=dark
-se t_Co=16
-colorscheme solarized
+if has('gui_running')
+    colorscheme anderson
+    set lines=100 columns=200
+else
+    set background=dark
+    se t_Co=16
+    colorscheme solarized
+endif
+
 "whitespace highlighting
 :hi ExtraWhitespace guibg=#990000 ctermbg=red
 
@@ -122,3 +130,30 @@ let g:airline_exclude_preview = 0
 "vim-pad directory
 let g:pad#dir = '~/settings/notes'
 autocmd BufWritePost *.py call Flake8()
+
+
+if has('gui_running')
+    """""""""""""""""
+    " GVIM SETTINGS "
+    """""""""""""""""
+    " Remove toolbar and scrollbars from gVim,
+    " because, frankly, they are a waste of space.
+    set guioptions-=T
+    set guioptions-=m
+    " Remove scrollbars
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
+    set guioptions-=b
+
+    " Use non-gui tabline
+    set guioptions-=e
+
+    " Automagically yank to windowing system clipboard on visual select.
+    " This makes gvim behave like a normal unix application.
+    set guioptions+=a
+
+    " Use console dialogs instead of popup dialogs, gosh
+    set guioptions+=c
+endif

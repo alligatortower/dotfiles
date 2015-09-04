@@ -1,11 +1,13 @@
 # Path to your oh-my-zsh installation.
+# [[ $TERM != "screen" ]] && exec tmux
 export ZSH=/home/cweed/.oh-my-zsh
+# export TERM=xterm-256color
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="blinks"
+ZSH_THEME="kphoen"
 
 # use dir_colors
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
@@ -56,6 +58,7 @@ plugins=(battery coffee cp django fabric git git-extras git-flow gnu-utils golan
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
+#
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,7 +86,15 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-. /usr/local/bin/virtualenvwrapper.sh
+export ATH=/usr/local/bin:$PATH
+
+VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+export NVM_DIR="/home/cweed/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+source ~/.nvm/nvm.sh
