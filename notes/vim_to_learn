@@ -1,10 +1,14 @@
 Vim to learn:
 
+Topics:
+Registers
+
 insert
 
 :r ![cmd / file] --> write stdout of cmd or file to buffer
 "gi" return to last insert
 "ctrl-n" autocomplete
+^t / ^d --> tab / untab
 
 navigation
 

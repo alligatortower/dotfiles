@@ -18,15 +18,20 @@ Plug 'tpope/vim-surround'
 Plug 'ctrlp.vim'
 Plug 'pytest.vim'
 Plug 'commentary.vim'
-Plug 'bling/vim-airline'
-Plug 'fmoralesc/vim-pad'
+Plug 'bling/vim-aIRline'
+Plug 'fmoralesc/Vim-pad'
 Plug 'rking/ag.vim'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'davidhalter/jedi-vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'sloria/vim-ped'
+Plug 'rhysd/clever-f.vim'
+Plug 'oblitum/rainbow'
+Plug 'craigemery/vim-autotag'
+Plug 'vim-scripts/taglist.vim'
+Plug 'jmcantrell/vim-virtualenv'
 call plug#end()
 syntax enable
-
 
 """"""""""""""""""
 " DISPLAY STUFFS "
@@ -91,6 +96,7 @@ map <leader>h :noh<CR>
 "map buffer tabbing
 map <leader>k :bn<CR>
 map <leader>j :bp<CR>
+nnoremap Q :bd<CR>
 "window navigation
 nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
@@ -107,12 +113,21 @@ map <F3> :set background=light<CR> :hi ExtraWhitespace guibg=#990000 ctermbg=red
 "line numbers
 map <F4> :set nu<CR> :set rnu<CR>
 map <F5> :set nornu<CR> :set nonu<CR>
+"remap K to inverse of J
+noremap K a<CR><ESC>
 "open nerd tree
 map <leader>t :NERDTreeToggle<CR>
 "open ctrlp
 map <leader>o :CtrlPMixed<CR>
 "paste toggle
 set pastetoggle=<F6>
+"vim pad
+map <leader>n :Pad new<CR>
+map <leader><ESC> :Pad ls<CR>
+"vim ped
+nmap <leader>e <Plug>PedPrompt
+nmap <leader>E <Plug>PedCwordExec
+vmap <leader>e <Plug>PedVwordExec
 
 
 """""""""""""""""""
@@ -130,6 +145,14 @@ let g:airline_exclude_preview = 0
 "vim-pad directory
 let g:pad#dir = '~/settings/notes'
 autocmd BufWritePost *.py call Flake8()
+"Rainbow parens
+" let g:rainbow_active = 1
+" :RainbowToggle
+" build ctags
+set tags=.tags;
+map <f12> :!ctags -R -f .tags . $VIRTUAL_ENV/lib/python3.4/site-packages<cr>
+" Taglist
+map <f11> :TlistOpen<cr>
 
 
 if has('gui_running')
@@ -140,6 +163,7 @@ if has('gui_running')
     " because, frankly, they are a waste of space.
     set guioptions-=T
     set guioptions-=m
+
     " Remove scrollbars
     set guioptions-=l
     set guioptions-=L
