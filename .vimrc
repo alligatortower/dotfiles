@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'altercation/vim-colors-solarized'
 Plug 'gilgigilgil/anderson.vim'
+Plug 'joshdick/onedark.vim'
 Plug 'bling/vim-bufferline'
 Plug 'garbas/vim-snipmate'
 Plug 'haya14busa/incsearch.vim'
@@ -30,6 +31,8 @@ Plug 'oblitum/rainbow'
 Plug 'craigemery/vim-autotag'
 Plug 'vim-scripts/taglist.vim'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'deris/vim-duzzle'
+Plug 'avakhov/vim-yaml'
 call plug#end()
 syntax enable
 
@@ -37,7 +40,7 @@ syntax enable
 " DISPLAY STUFFS "
 """"""""""""""""""
 if has('gui_running')
-    colorscheme anderson
+    colorscheme onedark
     set lines=100 columns=200
 else
     set background=dark
@@ -80,7 +83,10 @@ autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
 """""""""""
 " KEYMAPS "
 """""""""""
-let mapleader=";"
+let mapleader="\\"
+" want space to be mapleader but it doesn't show up in showcmd, so \ is
+" basically an alias
+map <space> \
 "fastsave
 map <Esc><Esc> :w<CR>
 "give me an extra year of my life
@@ -107,12 +113,9 @@ map <F8> <C-w>>
 map <S-F8> <C-w><
 map <F9> <C-w>+
 map <S-F9> <C-w>-
-"change background color
-map <F2> :set background=dark<CR> :hi ExtraWhitespace guibg=#990000 ctermbg=red<CR>
-map <F3> :set background=light<CR> :hi ExtraWhitespace guibg=#990000 ctermbg=red<CR>
 "line numbers
-map <F4> :set nu<CR> :set rnu<CR>
-map <F5> :set nornu<CR> :set nonu<CR>
+map <F3> :set nu<CR>:set rnu<CR>
+map <F4> :set nornu<CR>:set nonu<CR>
 "remap K to inverse of J
 noremap K a<CR><ESC>
 "open nerd tree
@@ -121,9 +124,6 @@ map <leader>t :NERDTreeToggle<CR>
 map <leader>o :CtrlPMixed<CR>
 "paste toggle
 set pastetoggle=<F6>
-"vim pad
-map <leader>n :Pad new<CR>
-map <leader><ESC> :Pad ls<CR>
 "vim ped
 nmap <leader>e <Plug>PedPrompt
 nmap <leader>E <Plug>PedCwordExec
@@ -145,15 +145,10 @@ let g:airline_exclude_preview = 0
 "vim-pad directory
 let g:pad#dir = '~/settings/notes'
 autocmd BufWritePost *.py call Flake8()
-"Rainbow parens
-" let g:rainbow_active = 1
-" :RainbowToggle
-" build ctags
-set tags=.tags;
-map <f12> :!ctags -R -f .tags . $VIRTUAL_ENV/lib/python3.4/site-packages<cr>
 " Taglist
 map <f11> :TlistOpen<cr>
-
+" Rainbow Parenthesis
+let g:rainbow_active = 1
 
 if has('gui_running')
     """""""""""""""""
