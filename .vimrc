@@ -144,6 +144,7 @@ let NERDTreeIgnore = ['\.pyc$']
 let g:airline_exclude_preview = 0
 "vim-pad directory
 let g:pad#dir = '~/settings/notes'
+" flake8 magic
 autocmd BufWritePost *.py call Flake8()
 " Taglist
 map <f11> :TlistOpen<cr>
@@ -151,6 +152,13 @@ map <f11> :TlistOpen<cr>
 let g:rainbow_active = 1
 
 if has('gui_running')
+    """""""""""""""""""""""""""""""""""""""""""""""
+    " Keymaps only gvim needs for whatever reason "
+    """""""""""""""""""""""""""""""""""""""""""""""
+    nmap <leader><esc> :Pad ls<CR>
+    nmap <leader>n :Pad new<CR>
+
+
     """""""""""""""""
     " GVIM SETTINGS "
     """""""""""""""""

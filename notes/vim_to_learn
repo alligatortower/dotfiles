@@ -7,12 +7,10 @@ insert
 
 :r ![cmd / file] --> write stdout of cmd or file to buffer
 "gi" return to last insert
-"ctrl-n" autocomplete
 ^t / ^d --> tab / untab
 
 navigation
 
-"{number}gg" go to line
 "zt" cursor top
 "zb" cursor bottom
 "m{key}" bookmark cursor
