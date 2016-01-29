@@ -34,12 +34,15 @@ Plug 'avakhov/vim-yaml'
 call plug#end()
 syntax enable
 
+
 """"""""""""""""""
 " DISPLAY STUFFS "
 """"""""""""""""""
 if has('gui_running')
     colorscheme onedark
     set lines=100 columns=200
+    " onedark doesn't set selected tab color correctly for whatever reason
+    hi TabLineSel  guifg=#999 guibg=#222
 else
     set background=dark
     se t_Co=16
@@ -76,6 +79,7 @@ autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
 autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab setl indentkeys-=<:>
 
 
 """""""""""
@@ -138,24 +142,30 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "nerd tree ignore filetypes
 let NERDTreeIgnore = ['\.pyc$']
+" ctrlp not slow as shit
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 "airline configs
 let g:airline_exclude_preview = 0
 "vim-pad directory
 let g:pad#dir = '~/settings/notes'
 " flake8 magic
 autocmd BufWritePost *.py call Flake8()
-" Taglist
-map <f11> :TlistOpen<cr>
 " Rainbow Parenthesis
 let g:rainbow_active = 1
 
+
+"""""""""""""
+" GVIM ONLY "
+"""""""""""""
 if has('gui_running')
     """""""""""""""""""""""""""""""""""""""""""""""
     " Keymaps only gvim needs for whatever reason "
     """""""""""""""""""""""""""""""""""""""""""""""
     nmap <leader><esc> :Pad ls<CR>
     nmap <leader>n :Pad new<CR>
-
 
     """""""""""""""""
     " GVIM SETTINGS "
