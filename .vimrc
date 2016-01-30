@@ -11,7 +11,6 @@ Plug 'garbas/vim-snipmate'
 Plug 'haya14busa/incsearch.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'nvie/vim-flake8'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tlib_vim'
@@ -31,6 +30,7 @@ Plug 'oblitum/rainbow'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'deris/vim-duzzle'
 Plug 'avakhov/vim-yaml'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 syntax enable
 
@@ -45,8 +45,8 @@ if has('gui_running')
     hi TabLineSel  guifg=#999 guibg=#222
 else
     set background=dark
-    se t_Co=16
-    colorscheme solarized
+    " let base16colorspace=256
+    colorscheme base16-mocha
 endif
 
 "whitespace highlighting
@@ -64,6 +64,9 @@ set numberwidth=1
 set hidden
 set hlsearch
 set laststatus=2
+" If the Vim buffer for a file doesn't have any changes and Vim detects the
+" file has been altered, quietly update it
+set autoread
 
 
 """""""""""""""""""""""""""""""
@@ -71,6 +74,7 @@ set laststatus=2
 """""""""""""""""""""""""""""""
 filetype indent plugin on
 filetype plugin on
+set shiftround
 set tabstop=4 shiftwidth=4 expandtab
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype sass setlocal tabstop=2 shiftwidth=2 expandtab
@@ -118,6 +122,8 @@ map <S-F9> <C-w>-
 "line numbers
 map <F3> :set nu<CR>:set rnu<CR>
 map <F4> :set nornu<CR>:set nonu<CR>
+"spellcheck toggle
+map <F5> :setlocal spell! spelllang=en_us<CR>
 "remap K to inverse of J
 noremap K a<CR><ESC>
 "open nerd tree
@@ -151,8 +157,15 @@ endif
 let g:airline_exclude_preview = 0
 "vim-pad directory
 let g:pad#dir = '~/settings/notes'
-" flake8 magic
-autocmd BufWritePost *.py call Flake8()
+"syntastic stuffs
+"
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 " Rainbow Parenthesis
 let g:rainbow_active = 1
 
