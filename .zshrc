@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
 # [[ $TERM != "screen" ]] && exec tmux
 export ZSH=/home/cweed/.oh-my-zsh
-# export TERM=xterm-256color
+export TERM=xterm-256color
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -98,3 +98,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export NVM_DIR="/home/cweed/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 source ~/.nvm/nvm.sh
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/base16-mocha.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL

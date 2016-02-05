@@ -2,35 +2,40 @@
 " PLUGINS "
 """""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'MarcWeber/vim-addon-mw-utils'
+"display
 Plug 'altercation/vim-colors-solarized'
 Plug 'gilgigilgil/anderson.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'bling/vim-bufferline'
-Plug 'garbas/vim-snipmate'
-Plug 'haya14busa/incsearch.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'oblitum/rainbow'
+"language specific
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'avakhov/vim-yaml'
+Plug 'pytest.vim'
+Plug 'sloria/vim-ped'
+"basic functionality++
+Plug 'tpope/vim-surround'
+Plug 'bling/vim-bufferline'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'haya14busa/incsearch.vim'
+Plug 'commentary.vim'
+Plug 'rking/ag.vim'
+Plug 'rhysd/clever-f.vim'
+Plug 'bling/vim-aIRline'
+"bonus features
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'tomtom/tlib_vim'
-Plug 'tpope/vim-surround'
 Plug 'ctrlp.vim'
-Plug 'pytest.vim'
-Plug 'commentary.vim'
-Plug 'bling/vim-aIRline'
 Plug 'fmoralesc/Vim-pad'
-Plug 'rking/ag.vim'
-Plug 'pelodelfuego/vim-swoop'
+Plug 'garbas/vim-snipmate'
 Plug 'davidhalter/jedi-vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'sloria/vim-ped'
-Plug 'rhysd/clever-f.vim'
-Plug 'oblitum/rainbow'
-Plug 'jmcantrell/vim-virtualenv'
-Plug 'deris/vim-duzzle'
-Plug 'avakhov/vim-yaml'
-Plug 'chriskempson/base16-vim'
+Plug 'pelodelfuego/vim-swoop'
+Plug 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
+Plug 'kshenoy/vim-signature'
+"misc
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
 call plug#end()
 syntax enable
 
@@ -45,7 +50,8 @@ if has('gui_running')
     hi TabLineSel  guifg=#999 guibg=#222
 else
     set background=dark
-    " let base16colorspace=256
+    set t_Co=256
+    let base16colorspace=256
     colorscheme base16-mocha
 endif
 
@@ -67,6 +73,7 @@ set laststatus=2
 " If the Vim buffer for a file doesn't have any changes and Vim detects the
 " file has been altered, quietly update it
 set autoread
+set updatetime=250
 
 
 """""""""""""""""""""""""""""""
@@ -95,7 +102,7 @@ let mapleader="\\"
 map <space> \
 "fastsave
 map <Esc><Esc> :w<CR>
-"give me an extra year of my life
+"give me a cumulative extra year of my life
 :inoremap jk <ESC>
 "Y yanks to end of line (consistency with D)
 map Y y$
@@ -141,24 +148,27 @@ vmap <leader>e <Plug>PedVwordExec
 """""""""""""""""""
 " PLUGIN SETTINGS "
 """""""""""""""""""
-"nerd tree start on empty vim
+"[nerd tree]
+""start on empty vim
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"nerd tree close if it's the only thing open
+""close if it's the only thing open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-"nerd tree ignore filetypes
+""ignore filetypes
 let NERDTreeIgnore = ['\.pyc$']
-" ctrlp not slow as shit
+"[ctrlp]
+""not slow as shit
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
-"airline configs
+"[airline]
+""configs
 let g:airline_exclude_preview = 0
-"vim-pad directory
+"[vim-pad]
+""directory
 let g:pad#dir = '~/settings/notes'
-"syntastic stuffs
-"
+"[syntastic]
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -166,9 +176,8 @@ let g:syntastic_check_on_wq = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-" Rainbow Parenthesis
+"[rainbow parenthesis]
 let g:rainbow_active = 1
-
 
 """""""""""""
 " GVIM ONLY "
