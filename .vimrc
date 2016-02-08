@@ -12,7 +12,6 @@ Plug 'oblitum/rainbow'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'avakhov/vim-yaml'
 Plug 'pytest.vim'
-Plug 'sloria/vim-ped'
 "basic functionality++
 Plug 'tpope/vim-surround'
 Plug 'bling/vim-bufferline'
@@ -23,12 +22,13 @@ Plug 'rking/ag.vim'
 Plug 'rhysd/clever-f.vim'
 Plug 'bling/vim-aIRline'
 "bonus features
+Plug 'Valloric/YouCompleteMe'
+Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'ctrlp.vim'
 Plug 'fmoralesc/Vim-pad'
 Plug 'garbas/vim-snipmate'
-Plug 'davidhalter/jedi-vim'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'mhinz/vim-signify'
 Plug 'airblade/vim-gitgutter'
@@ -139,10 +139,6 @@ map <leader>t :NERDTreeToggle<CR>
 map <leader>o :CtrlPMixed<CR>
 "paste toggle
 set pastetoggle=<F6>
-"vim ped
-nmap <leader>e <Plug>PedPrompt
-nmap <leader>E <Plug>PedCwordExec
-vmap <leader>e <Plug>PedVwordExec
 
 
 """""""""""""""""""
@@ -178,6 +174,13 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 "[rainbow parenthesis]
 let g:rainbow_active = 1
+"[ultisnips]
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsSnippetDirectories=["ultisnips"]
+let g:UltiSnipsSnippetsDir='~/.vim/ultisnips'
+
 
 """""""""""""
 " GVIM ONLY "
