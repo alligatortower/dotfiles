@@ -4,35 +4,37 @@
 call plug#begin('~/.vim/plugged')
 "display
 Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
 Plug 'gilgigilgil/anderson.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'oblitum/rainbow'
 "language specific
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'avakhov/vim-yaml'
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'pytest.vim'
 "basic functionality++
-Plug 'tpope/vim-surround'
-Plug 'bling/vim-bufferline'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'haya14busa/incsearch.vim'
-Plug 'commentary.vim'
-Plug 'rking/ag.vim'
-Plug 'rhysd/clever-f.vim'
 Plug 'bling/vim-aIRline'
+Plug 'bling/vim-bufferline'
+Plug 'haya14busa/incsearch.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'rhysd/clever-f.vim'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 "bonus features
-Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+Plug 'Valloric/YouCompleteMe'
+Plug 'airblade/vim-gitgutter'
 Plug 'ctrlp.vim'
 Plug 'fmoralesc/Vim-pad'
 Plug 'garbas/vim-snipmate'
-Plug 'pelodelfuego/vim-swoop'
-Plug 'mhinz/vim-signify'
-Plug 'airblade/vim-gitgutter'
 Plug 'kshenoy/vim-signature'
+Plug 'mhinz/vim-signify'
+Plug 'pelodelfuego/vim-swoop'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 "misc
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -62,18 +64,30 @@ endif
 """""""""""""""""
 " MISC SETTINGS "
 """""""""""""""""
+set nocompatible
+"use system clipboard
 set clipboard=unnamedplus
+"only search case senstivie if uppercase letter used
 set smartcase
+"start searching immediately
 set incsearch
+"window title = file (path)
 set title
+"minimal line number
 set numberwidth=1
+"hide buffers when :e-ing out
 set hidden
+"highlight what has been searched
 set hlsearch
+"status line always there
 set laststatus=2
 " If the Vim buffer for a file doesn't have any changes and Vim detects the
 " file has been altered, quietly update it
 set autoread
+"quicker updates
 set updatetime=250
+"start scroll when one line from top or bottom
+set scrolloff=1
 
 
 """""""""""""""""""""""""""""""
@@ -113,8 +127,6 @@ map g/ <Plug>(incsearch-stay)
 "remove highlighting
 map <leader>h :noh<CR>
 "map buffer tabbing
-map <leader>k :bn<CR>
-map <leader>j :bp<CR>
 nnoremap Q :bd<CR>
 "window navigation
 nnoremap <C-j> <C-w><C-j>
@@ -129,16 +141,12 @@ map <S-F9> <C-w>-
 "line numbers
 map <F3> :set nu<CR>:set rnu<CR>
 map <F4> :set nornu<CR>:set nonu<CR>
-"spellcheck toggle
-map <F5> :setlocal spell! spelllang=en_us<CR>
 "remap K to inverse of J
 noremap K a<CR><ESC>
 "open nerd tree
 map <leader>t :NERDTreeToggle<CR>
 "open ctrlp
 map <leader>o :CtrlPMixed<CR>
-"paste toggle
-set pastetoggle=<F6>
 
 
 """""""""""""""""""
@@ -152,18 +160,22 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 ""ignore filetypes
 let NERDTreeIgnore = ['\.pyc$']
+
 "[ctrlp]
 ""not slow as shit
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
 "[airline]
 ""configs
 let g:airline_exclude_preview = 0
+
 "[vim-pad]
 ""directory
 let g:pad#dir = '~/settings/notes'
+
 "[syntastic]
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -172,8 +184,10 @@ let g:syntastic_check_on_wq = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
 "[rainbow parenthesis]
 let g:rainbow_active = 1
+
 "[ultisnips]
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
