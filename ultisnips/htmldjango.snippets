@@ -1,0 +1,32 @@
+extends html
+
+snippet % "{% %}"
+{% $1 %}$0
+endsnippet
+
+snippet { "{{ }}"
+{{ $1 }}$0
+endsnippet
+
+snippet block "block"
+{% block ${1:blockname} %}
+  $0
+{% endblock $1 %}
+endsnippet
+
+snippet debug "debug"
+{% load debug_tags %}
+{% set_trace %}
+endsnippet
+
+snippet if "if"
+{% if ${1:condition} %}
+  $0
+{% endif %}
+endsnippet
+
+snippet for "for"
+{% for ${1:variable} in ${2:list} %}
+  $0
+{% endfor %}
+endsnippet
