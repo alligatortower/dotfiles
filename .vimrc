@@ -31,6 +31,8 @@ Plug 'ctrlp.vim'
 Plug 'fmoralesc/Vim-pad'
 Plug 'garbas/vim-snipmate'
 Plug 'kshenoy/vim-signature'
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'scrooloose/nerdtree'
@@ -88,6 +90,8 @@ set autoread
 set updatetime=250
 "start scroll when one line from top or bottom
 set scrolloff=1
+"must be set before yanking keys are remapped
+call yankstack#setup()
 
 
 """""""""""""""""""""""""""""""
@@ -120,10 +124,6 @@ map <Esc><Esc> :w<CR>
 :inoremap jk <ESC>
 "Y yanks to end of line (consistency with D)
 map Y y$
-"incsearch
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
 "remove highlighting
 map <leader>h :noh<CR>
 "map buffer tabbing
@@ -143,10 +143,20 @@ map <F3> :set nu<CR>:set rnu<CR>
 map <F4> :set nornu<CR>:set nonu<CR>
 "remap K to inverse of J
 noremap K a<CR><ESC>
+
+
+""""""""""""""""""
+" PLUGIN KEYMAPS "
+""""""""""""""""""
 "open nerd tree
 map <leader>t :NERDTreeToggle<CR>
 "open ctrlp
 map <leader>o :CtrlPMixed<CR>
+"open undotree
+nnoremap <F5> :UndotreeToggle<cr>
+"yankstack
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 
 """""""""""""""""""
@@ -169,11 +179,9 @@ if executable('ag')
 endif
 
 "[airline]
-""configs
 let g:airline_exclude_preview = 0
 
 "[vim-pad]
-""directory
 let g:pad#dir = '~/settings/notes'
 
 "[syntastic]
@@ -194,6 +202,12 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsSnippetDirectories=["ultisnips"]
 let g:UltiSnipsSnippetsDir='~/.vim/ultisnips'
+
+"[undotree]
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
+endif
 
 
 """""""""""""
