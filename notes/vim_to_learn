@@ -11,6 +11,10 @@ insert
 
 navigation
 
+** USE THIS DAMMIT **
+<C-o> / <C-i> go back/forward in "jumps"
+*************
+
 "zt" cursor top
 "zb" cursor bottom
 "m{key}" bookmark cursor
@@ -18,4 +22,3 @@ navigation
 |zN<CR>|	z{height}<CR>	   redraw, make window {height} lines high
 |zf|		zf{motion}	   create a fold for Nmove text
 |za|		za		   open a closed fold, close an open fold
-<C-o> / <C-i> go back/forward in "jumps"

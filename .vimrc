@@ -30,10 +30,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ctrlp.vim'
 Plug 'fmoralesc/Vim-pad'
 Plug 'garbas/vim-snipmate'
-Plug 'kshenoy/vim-signature'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mbbill/undotree'
-Plug 'mhinz/vim-signify'
+Plug 'kshenoy/vim-signature'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -108,16 +109,13 @@ autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
 autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab setl indentkeys-=<:>
+autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab
 
 
 """""""""""
 " KEYMAPS "
 """""""""""
-let mapleader="\\"
-" want space to be mapleader but it doesn't show up in showcmd, so \ is
-" basically an alias
-map <space> \
+let mapleader=" "
 "fastsave
 map <Esc><Esc> :w<CR>
 "give me a cumulative extra year of my life
@@ -126,7 +124,7 @@ map <Esc><Esc> :w<CR>
 map Y y$
 "remove highlighting
 map <leader>h :noh<CR>
-"map buffer tabbing
+"map buffer kill
 nnoremap Q :bd<CR>
 "window navigation
 nnoremap <C-j> <C-w><C-j>
@@ -172,8 +170,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let NERDTreeIgnore = ['\.pyc$']
 
 "[ctrlp]
-""not slow as shit
+""save cache
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+""use ag
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
@@ -208,6 +207,9 @@ if has("persistent_undo")
     set undodir=~/.undodir/
     set undofile
 endif
+
+"[fzf]
+let g:fzf_layout = { 'down': '~40%' }
 
 
 """""""""""""
