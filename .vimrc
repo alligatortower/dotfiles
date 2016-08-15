@@ -7,11 +7,14 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'gilgigilgil/anderson.vim'
 Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
 Plug 'oblitum/rainbow'
 "language specific
 Plug 'avakhov/vim-yaml'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'pytest.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 "basic functionality++
 Plug 'bling/vim-aIRline'
 Plug 'bling/vim-bufferline'
@@ -49,10 +52,11 @@ syntax enable
 " DISPLAY STUFFS "
 """"""""""""""""""
 if has('gui_running')
-    colorscheme onedark
+    colorscheme gruvbox
     set lines=100 columns=200
+    let g:gitgutter_override_sign_column_highlight = 0
     " onedark doesn't set selected tab color correctly for whatever reason
-    hi TabLineSel  guifg=#999 guibg=#222
+    " hi TabLineSel  guifg=#999 guibg=#222
 else
     set background=dark
     set t_Co=256
@@ -91,6 +95,9 @@ set autoread
 set updatetime=250
 "start scroll when one line from top or bottom
 set scrolloff=1
+"linenumbers on by default
+set nu
+set rnu
 "must be set before yanking keys are remapped
 call yankstack#setup()
 
@@ -110,6 +117,7 @@ autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
 autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab
+let g:jsx_ext_required = 0
 
 
 """""""""""

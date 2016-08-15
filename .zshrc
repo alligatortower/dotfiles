@@ -95,10 +95,6 @@ source /usr/local/bin/virtualenvwrapper.sh
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-export NVM_DIR="/home/cweed/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-source ~/.nvm/nvm.sh
-
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-mocha.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
