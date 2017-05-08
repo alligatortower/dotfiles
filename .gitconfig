@@ -1,0 +1,13 @@
+[user]
+	name = Alligatortower
+	email = mrweed@gmail.com
+
+[alias]
+    # removes local branches that don't exist on remote
+    prune = fetch --prune
+    # returns things to how they were before the last commit
+    undo = reset --soft HEAD^
+    # stashes untracked files as well
+    stash-all = stash save --include-untracked
+    # better log
+    glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
