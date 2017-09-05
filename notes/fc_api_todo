@@ -1,6 +1,0 @@
-fc api todo:
-student login saves student to lineitems. aka session lineitems carry over through login
-update addresses
-update quantity
-delete lineitem
-login component

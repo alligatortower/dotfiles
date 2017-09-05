@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
 "colorschemes
 Plug 'AlessandroYorba/Despacio'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'w0ng/vim-hybrid'
 "display
 Plug 'oblitum/rainbow'
 "language specific
@@ -19,6 +20,8 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'pytest.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'digitaltoad/vim-pug'
+Plug 'tomlion/vim-solidity'
 "basic functionality++
 Plug 'vim-airline/vim-airline'
 Plug 'haya14busa/incsearch.vim'
@@ -32,9 +35,10 @@ Plug 'tpope/vim-unimpaired'
 "bonus features
 Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlp.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
 Plug 'fmoralesc/Vim-pad'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -61,11 +65,14 @@ call plug#end()
 """""""""""
 " DISPLAY "
 """""""""""
-colorscheme despacio
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1
+colorscheme hybrid
+set background=dark
 "airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts=1
-let g:airline_theme='base16'
+let g:airline_theme='bubblegum'
 "whitespace highlighting
 :hi ExtraWhitespace guibg=#990000 ctermbg=red
 
@@ -212,3 +219,8 @@ endif
 
 "[fzf]
 let g:fzf_layout = { 'down': '~40%' }
+
+"[deoplete]
+let g:deoplete#enable_at_startup = 1
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"

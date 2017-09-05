@@ -1,0 +1,19 @@
+wiser setup
+- vagrant
+- error log folder to see output of errors
+- rabbitmq ssh into vagrant instruction in readme
+- reprovision vagrant if you make certain changes. wsgi file for example
+- pip install (for my machine and vagrant)
+- upgrade instructions and below - old stuff
+- vagrantfile - changed line 8 and 9 because of error
+- demo@getwiser.com / getwiser
+- admin login brianedelman / lightmatter
+- mandril works but needs data
+- delvenews old name
+- erland 19
+- cd /delvenews
+- /var/log/gunicorn/error (for error logs) actually delvenews/log/ 
+
+-- setup I learned
+- used version 3.3.0 of rabbit mq
+http://www.rabbitmq.com/releases/rabbitmq-server/v3.3.0/rabbitmq-server_3.3.0-1_all.deb

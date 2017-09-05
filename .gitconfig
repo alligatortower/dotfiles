@@ -2,6 +2,12 @@
 	name = Alligatortower
 	email = mrweed@gmail.com
 
+[merge]
+    tool = vimdiff
+
+[diff]
+    tool = vimdiff
+
 [alias]
     # removes local branches that don't exist on remote
     prune = fetch --prune
@@ -11,3 +17,5 @@
     stash-all = stash save --include-untracked
     # better log
     glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+[mergetool]
+	path = nvim
