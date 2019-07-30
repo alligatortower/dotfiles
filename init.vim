@@ -7,11 +7,11 @@
 " Plug 'gilgigilgil/anderson.vim'
 " Plug 'joshdick/onedark.vim'
 " Plug 'morhetz/gruvbox'
+" Plug 'AlessandroYorba/Despacio'
+" Plug 'w0ng/vim-hybrid'
 call plug#begin('~/.vim/plugged')
 "colorschemes
-Plug 'AlessandroYorba/Despacio'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'w0ng/vim-hybrid'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 "display
 Plug 'oblitum/rainbow'
 "language specific
@@ -22,8 +22,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'digitaltoad/vim-pug'
 Plug 'tomlion/vim-solidity'
+Plug 'lepture/vim-jinja'
+Plug 'HerringtonDarkholme/yats.vim'
 "basic functionality++
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rhysd/clever-f.vim'
@@ -39,7 +41,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ctrlp.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
-Plug 'fmoralesc/Vim-pad'
+Plug 'fmoralesc/Vim-pad'  " throwing insert mode mapping error on start
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
@@ -56,6 +58,8 @@ Plug 'KabbAmine/zeavim.vim', {'on': [
 			\	'<Plug>ZVKeyDocset',
 			\	'<Plug>ZVMotion'
 			\ ]}
+Plug 'euclio/vim-markdown-composer'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 "misc
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -65,17 +69,14 @@ call plug#end()
 """""""""""
 " DISPLAY "
 """""""""""
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1
-colorscheme hybrid
-set background=dark
-"airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts=1
-let g:airline_theme='bubblegum'
+colorscheme challenger_deep
+let g:lightline = { 'colorscheme': 'challenger_deep'}
+set laststatus=2
 "whitespace highlighting
 :hi ExtraWhitespace guibg=#990000 ctermbg=red
-
+if has('nvim') || has('termguicolors')
+  set termguicolors
+endif
 
 """""""""""""""""
 " MISC SETTINGS "
@@ -108,13 +109,15 @@ filetype plugin indent on
 filetype plugin on
 set shiftround
 set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype jinja setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype sass setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
-autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab
 let g:jsx_ext_required = 0
 
@@ -184,8 +187,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-"[airline]
-let g:airline_exclude_preview = 0
 
 "[vim-pad]
 let g:pad#dir = '~/dotfiles/notes'
