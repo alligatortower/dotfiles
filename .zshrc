@@ -58,7 +58,8 @@ plugins=(battery coffee cp django fabric git git-extras git-flow gnu-utils golan
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
-#
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,9 +87,13 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 export ATH=/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=~/go
 
-VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
@@ -100,3 +105,10 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-mocha.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source ~/code/galileo-dotfiles/bootstrap.sh
+
