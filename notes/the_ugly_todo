@@ -1,0 +1,41 @@
+# The Ugly TODO
+
+## MVP
+- translate to newer template (template keeps getting newer so no real rush)
+    - at least fix the drawer
+    - maybe try and make it functional for mobile?
+- some kind of extremely basic new user onboarding
+- turns
+    - completed turn log
+    - queued turn log
+        -mostly done just a little more info to start
+- buildings
+    - finalize data model / relationships
+    - add action support around building them
+    - drawing them to the map, or at least some kind of display
+- location details
+    -mostly done, just needs some data
+- enough content to support a basic loop
+
+
+## Important post MVP
+- Items
+    - everything about items
+- Quests
+    - dynamic content. Personalized?
+- make it functional in mobile if you haven't yet
+- Post-turn action forms
+    - are these "events"?
+
+
+## Want to do:
+- dynamic map location detail
+    - sights defined by skills
+- support for multiple path types
+
+
+## Big ideas not yet thought through
+- Sub locations
+    - like caves, towns(?) or old ruins
+    - real-time?
+    - can be "owned" ??

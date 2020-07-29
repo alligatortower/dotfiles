@@ -1,0 +1,10 @@
+Check indiivdual permission post to:
+'/permissions/get_permission/'
+with data
+'[{"content_type": "(\'vlcontenttypes\', \'lease\')", "instance_id": 3, "permission": "(\'change_lease\', \'vlcontenttypes\', \'lease\')", "user": 7}]'
+
+
+check table level post to:
+'/permissions/get_table_level_permission/'
+with data
+'[{"content_type": "(\'vlcontenttypes\', \'lease\')", "permission": "(\'add_lease\', \'vlcontenttypes\', \'lease\')", "user": 11}]'

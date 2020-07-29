@@ -1,0 +1,283 @@
+REVSHOP
+
+big tables I think I grok:
+- jobs
+  - parent job?
+  - want a way to have a single job number for the parent
+  - services might block on a job
+  - need to lock the price down so future prices changes don't change the price of already completed jobs
+- contacts
+- organization
+- event_log
+- items services
+  - extra things you can add to a job
+
+tables to ask about:
+*_components
+ - organizations
+ - press
+ - paper
+ -- unstructured data
+*_variables
+ - component???
+ - contact
+ - contribution
+ - job
+ - organization
+ -- might not be relevant
+pc_ocuc_org
+  - seems big
+  - paper data
+pid
+  - product id / scu
+  - pid_latest
+    - old math, use pid instead
+  - project details? or specific item to be printed details?
+RFQ
+  - request for quote
+  - seems similar to a job? or like a grouping of jobs maybe?
+  - not happy with dynamic pricing that gets overwritten
+
+
+misc questions
+- capitalization in table names, meaningful?
+  - job_Variables
+- what's with all of the temp tables
+  - tempOrgsorCid
+  - tempjobvariables
+  - how are these used
+
+
+
+# DATA VALIDATION ERRORS
+## contact
+- row 870 org_id "Welch", fax is email
+- row 5215, org_id Bergren, fax is email
+
+# Model / field questions
+## item service
+- has type and sub type fk to ValidationOption but none included in data
+## projects
+- missing
+## jobs
+- missing
+
+
+# FIELDS missing meeting
+## press components
+- missing:
+    - average_run_speed_small
+    - average_run_speed_large
+    - bw_click
+    - color_click
+
+
+
+o Print Services Cost
+o Paper Cost
+o Press Cost
+o Estimated_run_time
++ Job Total Page Count
+o Cutting Cost
+o Ink Cost
+o Coating Cost
++ Binding Cost
++ Lamination Cost
++ Bundling Cost
++ Hole Drilling Cost
+? Total Box Cost
+  - this related to StandardBox table?
+  - how are standard boxes related to jobs?
+  - thickness_of_product?
+? PID Market Unit Price
+  - what table, how is this calculated?
+? PID Market Price
+  - what table is this associated with
+  ? op_unit_price -- field on OrganizationPid, but not sure how exactly that should relate
+? Tax Percentage and Price
+? Shipping
+o Job Total
++ PMS Ink:
++ Sides:
++ Pages/Sides
++ PMS or Coating
++ Black or CMYK Plates
++ Total Plates
+? Digital Cost
+o N-UP (NEW, UPDATED 4/2019 SEE BELOW FOR UPDATE)
+
+removed:
+- Job
+  - pid_sides (can get through pid relationship)
+  - total_page_count (we are computing this from inner and cover page counts)
+  - bundling_cost (computed)
+
+
+# NEW DB
+- We are destroying the old database and recreating
+  - We are deleting
+    - ComponentVariable
+    - ComponentVariableBkp2509
+    - ContactSurvey
+    - ContactVariable
+    - ContributionVariable
+    - Contribution
+    - Eventlog
+    - Eventnotificationslog
+    - Inventory
+    - ItemsService
+    - JobVariable
+    - JobGrouping (Project)
+    - Keyword
+    - Media
+    - MediaGrouping
+    - Metadata
+    - OrgComponentUnitCost
+    - OrganizationItemsService
+    - OrganizationVariable
+    - PressComponent
+    - RfqContact
+    - RfqDefaultSupplier
+    - RfqDetailQuantity
+    - RfqDetail
+    - RfqHistory
+    - RfqMaster
+    - RfqQuantity
+    - StandardBox
+    - SurveyQuestionOption
+    - SurveyQuestion
+    - Tbldictionary
+    - ValidationOption
+    - Validation
+  - We are modifying
+    - Contact / ContactAddress -- removing address out of contact, contacts can have 0 or multiple addresses
+    - JobQuantityVersion -- rolling into our concept of a project, probably
+
+## style / small stuff
+- can we name the fields (e.g.) `length` instead of `parcel_length`
+- status fields being renamed to `active` wich is a bool (either true or false, defaults to true)
+
+
+## Relationships
+- make through table for services and paper --> orgs
+  - which of these fields can be updated by an org?
+
+## New concepts
+- project
+  - already exists in some form, will be a collection of jobs, services and pids for end-users
+- project template
+  - fast way to set up the former
+- printing run
+ - collection of jobs for the printers, to help improve margins
+
+## specific table questions
+- Paper
+  - paper_core - what type of information is stored here
+
+- Pid
+  - pid_equipment_group -- What are equipment groups? Will you want to add more groups dynamically? do we want another table for this?
+  - pid_default_paper_item_description + others -- why the square brackets in the data?
+  - pid_inks_front -- only ever black or CMYK? could we do 2 bools i.e. pid_inks_front_black (true or false)?
+  - pid_mandatory_services -- Do we want to link these directly to services we have in the db?
+  - pid_unit_option -- will you ever want more than 3 options? We could add a PidUnitOpion model and associate however many with a pid
+
+- contact -- none
+
+- Organization
+  - org_parent_organization -- is this reference to another org (self fk)?
+  - org_organization_status -- can we change this to an org_active bool?
+  - org_notes -- listed twice, just one right?
+  - (sorry, typo) org_supplier_srofile_year_established
+  - org_supplier_<etc> -- this is information about an org only if it's a supplier?
+
+- Equipment
+  - equip_component -- can we shorten this to just equip
+  - equip_org_id / equip_org_name -- What is this used for? Is this data for specifying which org its associated with, when multiples of the same equip are listed?
+
+- Guide Data
+  - "GuideData" or "Guide"
+  - gu_component_id -- fk to equipment or paper?
+  - gu_effective_end/start -- do we need this?
+  - hu_page_vo -- do we care about validation options? -- I think we've decided no
+
+
+# New Start
+
+Organization
+  - org_parent_organization --> org_parent_organization_name
+
+Paper
+  - paper_price_uom
+
+Services
+  - service_cost, service_makeready_cost, service_markup -- all need to be floats
+
+OrganizationPid
+  - Have paper overwrite fields but not pid
+
+JOBS -- big missing piece
+
+statuses -- need conversation
+
+
+
+# calculation Qs
+- estimated_run_time -- which avg run time?
+- number_of_bundles -- is bundle_size calculated or given by job, is there a default of 1?
+- N_UP -- where is the data for this taken from?
+- ink_color_sqin
+- sheet_square_inches
+- no. of folds?
+- (obvious but want to ask anyway) job_inks_front / job_inks_back -- both job fields we need to have?
+- digital cost? Is there a default value?
+- example of a service associated with a job in terms of pricing engine
+
+
+## meeting notes
+- estimated_run_time = based on press_size_sheet
+- final_height / width = flat item height / width
+- bundle size default 0
+- ink_color_sqin = come from press ink_color_sqin
+- no of folds == hardcoded in pids
+- pid has services you can add to a job created from it
+- one press one paper (once created)
+
+
+
+
+
+# SKU PRICING
+- I know how to narrow down paper list, but how do I choose which one out of those to use for default paper price? Right now, as a temporary solution, I'm just taking the first of the filtered list (but the order is arbitrary currently, so "first" has no meaning).
+- ditto for press / equip
+- Is it correct to include the price for all mandatory services and none of the optional services?
+- what are the sku fields to use for these following calculation variables:
+  - job_quantity
+    - need to add a field defualt at 10
+  - total_plates -- which for job I'm calculating from:
+    - pms_ink -- which for job I'm calculating from:
+      - pms_colors_front [and is this even a valid field for jobs?]
+      - pms_colors_back [and is this even a valid field for jobs?]
+      - leave off for now
+    - number_of_forms [and is this even a valid field for jobs?]
+      - paper_list = nup has run how many of this fit on the paper
+
+
+    - nup
+     - default bleed to .125
+     - final size (getting back to me)
+
+
+    - binding_side
+      - new field (landscape, portrait), default to long side
+
+
+    - NEW FIELDS TO DISPLAY
+      - press and paper
+      - clicks
+      - total_sheets
+      - total_plates
+      - nup
+      - services
+        - makeready
+        - coefficient
+        - others

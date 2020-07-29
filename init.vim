@@ -6,26 +6,28 @@
 " Plug 'chriskempson/base16-vim'
 " Plug 'gilgigilgil/anderson.vim'
 " Plug 'joshdick/onedark.vim'
-" Plug 'morhetz/gruvbox'
 " Plug 'AlessandroYorba/Despacio'
 " Plug 'w0ng/vim-hybrid'
+" Plug 'nightsense/carbonized'
+" Plug 'oblitum/rainbow'
+" Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 call plug#begin('~/.vim/plugged')
 "colorschemes
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'morhetz/gruvbox'
 "display
-Plug 'oblitum/rainbow'
+Plug 'itchyny/lightline.vim'
+Plug 'shinchu/lightline-gruvbox.vim'
 "language specific
 Plug 'avakhov/vim-yaml'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'pytest.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'digitaltoad/vim-pug'
 Plug 'tomlion/vim-solidity'
 Plug 'lepture/vim-jinja'
 Plug 'HerringtonDarkholme/yats.vim'
 "basic functionality++
-Plug 'itchyny/lightline.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rhysd/clever-f.vim'
@@ -38,9 +40,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
-Plug 'ctrlp.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+Plug 'kien/ctrlp.vim'
 Plug 'fmoralesc/Vim-pad'  " throwing insert mode mapping error on start
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -61,16 +61,30 @@ Plug 'KabbAmine/zeavim.vim', {'on': [
 Plug 'euclio/vim-markdown-composer'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 "misc
+Plug 'stevearc/vim-arduino'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
+
+" Jedi stuff
+Plug 'deoplete-plugins/deoplete-jedi'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 call plug#end()
 
 
 """""""""""
 " DISPLAY "
 """""""""""
-colorscheme challenger_deep
-let g:lightline = { 'colorscheme': 'challenger_deep'}
+autocmd vimenter * colorscheme gruvbox
+let g:lightline = {}
+let g:lightline.colorscheme = 'gruvbox'
 set laststatus=2
 "whitespace highlighting
 :hi ExtraWhitespace guibg=#990000 ctermbg=red
@@ -97,9 +111,11 @@ set updatetime=250
 set scrolloff=1
 "linenumbers on by default
 set nu
-set rnu
 "must be set before yanking keys are remapped
 call yankstack#setup()
+let g:python_host_prog  = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
+
 
 
 """""""""""""""""""""""""""""""
@@ -114,10 +130,11 @@ autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype javascriptreact setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype jinja setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype sass setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab
 let g:jsx_ext_required = 0
 
@@ -147,8 +164,8 @@ map <S-F8> <C-w><
 map <F9> <C-w>+
 map <S-F9> <C-w>-
 "line numbers
-map <F3> :set nu<CR>:set rnu<CR>
-map <F4> :set nornu<CR>:set nonu<CR>
+map <F3> :set nu<CR>
+map <F4> :set nonu<CR>
 "remap K to inverse of J
 noremap K a<CR><ESC>
 
@@ -165,6 +182,9 @@ nnoremap <F5> :UndotreeToggle<cr>
 "yankstack
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
+nmap <leader>ss<leader> *g:pad#maps#incsearch*
+"fzf
+nmap <leader>a :Ag<space>
 
 
 """""""""""""""""""
@@ -182,6 +202,8 @@ let NERDTreeIgnore = ['\.pyc$']
 "[ctrlp]
 ""save cache
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+""use dir you started vim in
+let g:ctrlp_working_path_mode = 0
 ""use ag
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -190,6 +212,8 @@ endif
 
 "[vim-pad]
 let g:pad#dir = '~/dotfiles/notes'
+" height of the buffer that opens
+let g:pad#window_height = 25
 
 "[syntastic]
 let g:syntastic_always_populate_loc_list = 1
@@ -208,8 +232,7 @@ let g:rainbow_active = 1
 let g:UltiSnipsExpandTrigger = "<c-j>"
 let g:UltiSnipsJumpForwardTrigger = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
-let g:UltiSnipsSnippetsDir = $HOME."/.config/UltiSnips"
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.config/UltiSnips']
+let g:UltiSnipsSnippetDirectories = ['ultisnips', $HOME.'/dotfiles/ultisnips']
 let g:UltiSnipsEnableSnipMate = 0
 
 "[undotree]
@@ -225,3 +248,7 @@ let g:fzf_layout = { 'down': '~40%' }
 let g:deoplete#enable_at_startup = 1
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+"[vim-jedi]
+" disable the pydocs window
+set completeopt-=preview

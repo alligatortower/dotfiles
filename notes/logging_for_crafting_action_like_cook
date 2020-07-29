@@ -1,0 +1,18 @@
+# logging for crafting action like cook
+- TURN
+    -Location
+    -moved from
+    -Action
+    -total resources spent
+    -total resources gained
+    -XP gained
+    -random stuff that happened?
+    -[field] for fields
+        -field_name
+        -field value
+        -[round] for value
+            -how many resources gained
+            -how many resources lost
+            -any notable thing that happened?
+
+

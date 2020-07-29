@@ -1,0 +1,61 @@
+# wineapp notes
+
+
+## homepage
+### order status displayed to user on front page.
+- depends on status, specific bottles not shown until user picks it up
+
+### order status data
+- status of order, changed at point they pick it up.
+
+
+## $$$$$$
+- stripe?
+-
+
+
+## blog / newsletter
+MVP
+- export user emails for newsletter platform
+
+NOT MVP
+- each month:
+  - posted to blog
+  - sent as newsletter
+- personalized in email
+- blog includes everything
+
+
+## Review
+
+### email review
+- let you start review in-email (airbnb model). takes you to site
+
+### on-site form
+- 5 questions (?)
+- Can they change review?
+  - maybe
+
+
+## order history
+- see past bottles and your review
+-
+
+
+
+## models
+
+### User
+- (method) most recent Persona
+- (method) get Persona for month
+- m2m Persona through UserPersona
+
+### Persona
+- name
+
+### UserPersona
+- month
+- fk User
+- fk Persona
+
+

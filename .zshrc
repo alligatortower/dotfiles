@@ -47,16 +47,36 @@ compinit
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+source ~/.oh-my-zsh/plugins/history-substring-search/history-substring-search.zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(battery coffee cp django fabric git git-extras git-flow gnu-utils golang history history-substring-search pip python redis-cli rsync screen zsh-syntax-highlighting heroku ember )
+plugins=(
+battery
+coffee
+cp
+django
+fabric
+git
+git-extras
+git-flow
+gnu-utils
+golang
+history
+history-substring-search
+pip
+python
+redis-cli
+rsync
+screen
+zsh-syntax-highlighting
+heroku )
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/postgresql/11/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
@@ -110,5 +130,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-source ~/code/galileo-dotfiles/bootstrap.sh
-
+export PATH="$PATH:/opt/mssql-tools/bin"
