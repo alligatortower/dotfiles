@@ -58,7 +58,7 @@ Plug 'KabbAmine/zeavim.vim', {'on': [
 			\	'<Plug>ZVKeyDocset',
 			\	'<Plug>ZVMotion'
 			\ ]}
-Plug 'euclio/vim-markdown-composer'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 "misc
 Plug 'stevearc/vim-arduino'

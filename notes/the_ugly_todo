@@ -5,6 +5,8 @@
     - at least fix the drawer
     - maybe try and make it functional for mobile?
 - some kind of extremely basic new user onboarding
+    - mostly done
+    - finish writing it
 - turns
     - completed turn log
     - queued turn log
@@ -16,6 +18,8 @@
 - location details
     -mostly done, just needs some data
 - enough content to support a basic loop
+- events now because of course there's a big new thing
+- ailments
 
 
 ## Important post MVP
@@ -26,12 +30,13 @@
 - make it functional in mobile if you haven't yet
 - Post-turn action forms
     - are these "events"?
+- refactor so consume form uses action form class
+- pick-me-ups
 
 
 ## Want to do:
 - dynamic map location detail
     - sights defined by skills
-- support for multiple path types
 
 
 ## Big ideas not yet thought through
