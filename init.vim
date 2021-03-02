@@ -11,13 +11,16 @@
 " Plug 'nightsense/carbonized'
 " Plug 'oblitum/rainbow'
 " Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+" Plug 'morhetz/gruvbox'
+" Plug 'jacoborus/tender.vim'
 call plug#begin('~/.vim/plugged')
 "colorschemes
-Plug 'morhetz/gruvbox'
+Plug 'phanviet/vim-monokai-pro'
 "display
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 "language specific
+Plug 'sheerun/vim-polyglot'
 Plug 'avakhov/vim-yaml'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'pangloss/vim-javascript'
@@ -44,13 +47,13 @@ Plug 'kien/ctrlp.vim'
 Plug 'fmoralesc/Vim-pad'  " throwing insert mode mapping error on start
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'mbbill/undotree'
 Plug 'kshenoy/vim-signature'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'Floobits/floobits-neovim'
+Plug 'chrisbra/Colorizer'
+" Plug 'Floobits/floobits-neovim'
 Plug 'KabbAmine/zeavim.vim', {'on': [
 			\	'Zeavim', 'Docset',
 			\	'<Plug>Zeavim',
@@ -67,6 +70,7 @@ Plug 'tomtom/tlib_vim'
 
 " Jedi stuff
 Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -75,16 +79,23 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
 call plug#end()
+
+let g:deoplete#enable_at_startup = 1
 
 
 """""""""""
 " DISPLAY "
 """""""""""
-autocmd vimenter * colorscheme gruvbox
-let g:lightline = {}
-let g:lightline.colorscheme = 'gruvbox'
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+syntax enable
+colorscheme monokai_pro
+let g:lightline = { 'colorscheme': 'monokai_pro' }
+" make comments bright
+hi Comment guifg=#FFA500
+" remove -- insert -- now redundent thanks to lightline
+set noshowmode
+
 set laststatus=2
 "whitespace highlighting
 :hi ExtraWhitespace guibg=#990000 ctermbg=red
@@ -111,9 +122,7 @@ set updatetime=250
 set scrolloff=1
 "linenumbers on by default
 set nu
-"must be set before yanking keys are remapped
-call yankstack#setup()
-let g:python_host_prog  = '/usr/bin/python'
+
 let g:python3_host_prog = '/usr/bin/python3'
 
 
@@ -167,7 +176,7 @@ map <S-F9> <C-w>-
 map <F3> :set nu<CR>
 map <F4> :set nonu<CR>
 "remap K to inverse of J
-noremap K a<CR><ESC>
+" noremap K a<CR><ESC>
 
 
 """"""""""""""""""
@@ -185,6 +194,15 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 nmap <leader>ss<leader> *g:pad#maps#incsearch*
 "fzf
 nmap <leader>a :Ag<space>
+" vim-jedi
+let g:jedi#goto_command = "<leader>jd"
+let g:jedi#goto_assignments_command = "<leader>jg"
+let g:jedi#goto_stubs_command = "<leader>js"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>jn"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>jr"
 
 
 """""""""""""""""""

@@ -1,25 +1,24 @@
 [global_config]
+  title_hide_sizetext = True
+  title_transmit_fg_color = "#c5c8c6"
+  title_transmit_bg_color = "#282a2e"
+  title_receive_bg_color = "#ad7fa8"
   inactive_color_offset = 0.803921568627
   suppress_multiple_term_dialog = True
-  title_font = Inconsolata 11
-  title_hide_sizetext = True
-  title_receive_bg_color = "#ad7fa8"
-  title_transmit_bg_color = "#282a2e"
-  title_transmit_fg_color = "#c5c8c6"
   title_use_system_font = False
+  title_font = Inconsolata 11
 [keybindings]
+  go_up = <Ctrl><Shift>k
   go_down = <Ctrl><Shift>j
   go_left = <Ctrl><Shift>h
   go_right = <Ctrl><Shift>l
-  go_up = <Ctrl><Shift>k
+  split_horiz = <alt>j
+  split_vert = <alt>h
+  resize_up = <alt><shift>k
   resize_down = <alt><shift>j
   resize_left = <alt><shift>h
   resize_right = <alt><shift>l
-  resize_up = <alt><shift>k
-  split_horiz = <alt>j
-  split_vert = <alt>h
   switch_to_tab_1 = <alt>1
-  switch_to_tab_10 = <alt>10
   switch_to_tab_2 = <alt>2
   switch_to_tab_3 = <alt>3
   switch_to_tab_4 = <alt>4
@@ -28,6 +27,19 @@
   switch_to_tab_7 = <alt>7
   switch_to_tab_8 = <alt>8
   switch_to_tab_9 = <alt>9
+  switch_to_tab_10 = <alt>10
+[profiles]
+  [[default]]
+    background_color = "#1d1f21"
+    background_darkness = 0.94
+    background_type = transparent
+    cursor_color = "#c5c8c6"
+    font = Noto Naskh Arabic UI 10
+    foreground_color = "#c5c8c6"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_infinite = True
+    palette = "#282a2e:#a54242:#8c9440:#de935f:#5f819d:#85678f:#5e8d87:#707880:#373b41:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c8c6"
 [layouts]
   [[default]]
     [[[child1]]]
@@ -38,69 +50,4 @@
       parent = ""
       size = 1200, 800
       type = Window
-  [[dev]]
-    [[[child0]]]
-      fullscreen = False
-      last_active_term = d1f7f2ad-cfbd-48b9-8316-78fcf8e48997
-      last_active_window = True
-      maximised = False
-      order = 0
-      parent = ""
-      position = 49:25
-      size = 1704, 1002
-      type = Window
-    [[[child1]]]
-      order = 0
-      parent = child0
-      position = 230
-      ratio = 0.22977022977
-      type = VPaned
-    [[[child2]]]
-      order = 0
-      parent = child1
-      position = 528
-      ratio = 0.310041103934
-      type = HPaned
-    [[[child4]]]
-      order = 1
-      parent = child2
-      position = 587
-      ratio = 0.5
-      type = HPaned
-    [[[terminal3]]]
-      order = 0
-      parent = child2
-      profile = default
-      type = Terminal
-      uuid = b202f09a-83aa-484c-a04e-14cf82fe0629
-    [[[terminal5]]]
-      order = 0
-      parent = child4
-      profile = default
-      type = Terminal
-      uuid = c59aaf01-4c48-495e-9593-d988ca91fd10
-    [[[terminal6]]]
-      order = 1
-      parent = child4
-      profile = default
-      type = Terminal
-      uuid = 91a31437-68f2-4ca5-8493-a97042d5d5e2
-    [[[terminal7]]]
-      order = 1
-      parent = child1
-      profile = default
-      type = Terminal
-      uuid = d1f7f2ad-cfbd-48b9-8316-78fcf8e48997
 [plugins]
-[profiles]
-  [[default]]
-    background_color = "#1d1f21"
-    background_darkness = 0.94
-    background_type = transparent
-    cursor_color = "#c5c8c6"
-    font = Noto Naskh Arabic UI 10
-    foreground_color = "#c5c8c6"
-    palette = "#282a2e:#a54242:#8c9440:#de935f:#5f819d:#85678f:#5e8d87:#707880:#373b41:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c8c6"
-    scrollback_infinite = True
-    scrollbar_position = hidden
-    show_titlebar = False

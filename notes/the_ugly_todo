@@ -1,46 +1,75 @@
 # The Ugly TODO
+## Nagging issues
+- actions: fix icons
+- numberfield maximum 0 needs to check for !== null
 
-## MVP
-- translate to newer template (template keeps getting newer so no real rush)
-    - at least fix the drawer
-    - maybe try and make it functional for mobile?
-- some kind of extremely basic new user onboarding
-    - mostly done
-    - finish writing it
-- turns
-    - completed turn log
-    - queued turn log
-        -mostly done just a little more info to start
+## Bugs
+- sign in
+    - what's going on there
+- ticks
+    - make sure new character generation / train is working still
+
+## Alpha
 - buildings
     - finalize data model / relationships
     - add action support around building them
     - drawing them to the map, or at least some kind of display
 - location details
-    -mostly done, just needs some data
+    - make the location stats do literally anything, at least display them
+    - display other characters nearby
+    - display buildings correctly
+- ticks
+    - make them update char spirit
 - enough content to support a basic loop
-- events now because of course there's a big new thing
 - ailments
+    - if only just the base sickness
+- ?? station to town onboarding adventure
+    - move intro station away from town. introduction takes place in the space between them
+    - pathfind between them I guess
+- ?? Quests
+    - fixed to start
+    - just like, build a thing in town or something
 
 
-## Important post MVP
-- Items
-    - everything about items
-- Quests
-    - dynamic content. Personalized?
-- make it functional in mobile if you haven't yet
-- Post-turn action forms
-    - are these "events"?
-- refactor so consume form uses action form class
-- pick-me-ups
+## tech debt
+- pathfinder
+    -turn list items into objects instead of just tuples (or whatever they are now)
+        - you can now serialize them easier and I bet it'll clean up that whole thing
+- Feedback on skill increases
+    - snackbar let me know I increased in level
+    - snackbar let me know I can now do new things (new recipes / skill unlocks)
 
 
-## Want to do:
+## ideas not yet prioritized
+- Town
+    - NPCs?
+- items
+    - data model
+    - creating them
+    - equiping them
+- Death
+    - user-level upgrades / xp
+    - class unlocking
+    - user-level events to handle this?
 - dynamic map location detail
     - sights defined by skills
-
-
-## Big ideas not yet thought through
+- Regions / roads / mountains
+    - make these a thing
+    - model
+    - roads
+        - take a path, verify it's contiguous
+        - do shit like track safety, etc
+    -mountains
+        - pathfind out what is connected
 - Sub locations
     - like caves, towns(?) or old ruins
     - real-time?
     - can be "owned" ??
+- Quests
+    - dynamic, based on world sim
+
+
+## needs more thought
+- pick-me-ups
+- ailments
+- world sim
