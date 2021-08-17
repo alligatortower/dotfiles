@@ -2,6 +2,18 @@ snippet ipdb "debug" b
 import ipdb; ipdb.set_trace()
 endsnippet
 
+snippet heading "heading" b
+`!p
+length = len(t[1]) + 4
+snip.rv = '#' * length
+`
+# ${1} #
+`!p
+length = len(t[1]) + 4
+snip.rv = '#' * length
+`
+endsnippet
+
 snippet def "small function" b
 def ${1:function_name}(${2:arguments}):
 	${0:pass}
@@ -14,4 +26,18 @@ endsnippet
 
 snippet d[ "dictionary key"
 ${1:dict_name}['${2:key}'] = ${3:value}$0
+endsnippet
+
+snippet init "__init__" b
+def __init__(self, $1):
+`!p
+args = t[1]
+if args:
+	assign = []
+    for arg in args.split(", "):
+		if "=" in arg:
+			arg = arg.split("=")[0]
+        assign.append(f"    self.{arg} = {arg}\n")
+	snip.rv = ''.join(assign)
+`
 endsnippet

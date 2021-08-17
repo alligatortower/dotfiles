@@ -22,12 +22,61 @@ if props:
 export default $1;
 endsnippet
 
-snippet stylesmui "React Functional Component" b
+snippet rfcrdx "React Functional Component with redux stuff" b
+import React from 'react';
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
+
+function ${1:`!v expand('%:t:r')`}({ $2 }) {
+  $0
+  return (
+  );
+}
+
+$1.defaultProps = {$3};
+
+$1.propTypes = {`!p
+props = t[2]
+if props:
+  snip >> 1
+  for prop in props.split(', '):
+    snip += prop + ': PropTypes.any,'
+`
+};
+
+const ${4:mapStateToProps}`!p
+if t[4] == "mapStateToProps":
+    snip.rv = " = state => ({\n})"
+else:
+    snip.rv = ""
+`
+const ${5:mapDispatchToProps}`!p
+if t[5] == "mapDispatchToProps":
+    snip.rv = " = dispatch => ({\n})"
+else:
+    snip.rv = ""
+`
+
+export default connect(`!p
+if t[4] == "mapStateToProps":
+    snip.rv = t[4]
+else:
+    snip.rv = "null"
+`, `!p
+if t[5] == "mapDispatchToProps":
+    snip.rv = t[5]
+else:
+    snip.rv = "null"
+`)($1);
+
+endsnippet
+
+snippet stylesmui "Mui Styles" b
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
 	$1: {
-		$0
+        $0
 	}
 })
 
@@ -40,4 +89,20 @@ snippet jsxifelse "jsx if else" b
 ) : (
 	$3
 )}$0
+endsnippet
+
+snippet t "tag"
+<${1:tag}>
+  ${0:${VISUAL}}
+</${1/(\w+).*/$1/}>
+endsnippet
+
+snippet import "import" i
+import $1 from '$2';
+endsnippet
+
+snippet () "arrow func" i
+($1) => {
+  $0
+}
 endsnippet

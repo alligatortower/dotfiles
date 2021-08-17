@@ -2,6 +2,8 @@
 # [[ $TERM != "screen" ]] && exec tmux
 export ZSH=/home/cweed/.oh-my-zsh
 export TERM=xterm-256color
+# hack to make weird debug logs go away
+export PYTHONSTARTUP="$HOME/pythonstartup.py"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -114,6 +116,8 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$HOME/.local/bin:$PATH
 export GOPATH=~/go
 alias ag='ag --hidden'
+alias swampremote='ssh -X swamp x2x -west -to :0'
+alias sp='./manage.py shell_plus'
 
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs

@@ -122,6 +122,8 @@ set updatetime=250
 set scrolloff=1
 "linenumbers on by default
 set nu
+"time to wait for next key in sequence
+set timeoutlen=300
 
 let g:python3_host_prog = '/usr/bin/python3'
 
@@ -242,6 +244,7 @@ let g:syntastic_python_checkers = ["flake8"]
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+let g:syntastic_c_checkers = []
 
 "[rainbow parenthesis]
 let g:rainbow_active = 1

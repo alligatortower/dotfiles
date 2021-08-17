@@ -1,13 +1,33 @@
 # The Ugly TODO
+
+
 ## Nagging issues
+- railrode not being generated in create_new_map flow because of off-by-one boundary error I think
+    - probably want to handle getting and creating non-existing locations in a more holistic way
 - actions: fix icons
 - numberfield maximum 0 needs to check for !== null
+
 
 ## Bugs
 - sign in
     - what's going on there
 - ticks
     - make sure new character generation / train is working still
+
+
+## conflict
+- log
+    - display
+    - writing to log
+- costs
+    - how to handle displaying costs, applies to all resourceforms
+        - tooltips is the best guess so far
+- applying abilities
+- loot
+- skill gain
+- ending
+    - communicating end to parent scenario if exists
+
 
 ## Alpha
 - buildings
@@ -26,27 +46,32 @@
 - ?? station to town onboarding adventure
     - move intro station away from town. introduction takes place in the space between them
     - pathfind between them I guess
+    - maybe some baseline implementation of regions?
 - ?? Quests
     - fixed to start
     - just like, build a thing in town or something
+
+
+## Nice to have improvements
+- Feedback on skill increases
+    - flash message let me know I can now do new things (new recipes / skill unlocks)
+- equipment
+    - equiping them
+    ? creating them
+- redo sidebar to account for equipment and future things
 
 
 ## tech debt
 - pathfinder
     -turn list items into objects instead of just tuples (or whatever they are now)
         - you can now serialize them easier and I bet it'll clean up that whole thing
-- Feedback on skill increases
-    - snackbar let me know I increased in level
-    - snackbar let me know I can now do new things (new recipes / skill unlocks)
+- names
+    - standardize "get_render_data" "get_json" "get_render_json" (probably the latter)
 
 
 ## ideas not yet prioritized
 - Town
     - NPCs?
-- items
-    - data model
-    - creating them
-    - equiping them
 - Death
     - user-level upgrades / xp
     - class unlocking

@@ -12,4 +12,5 @@ else
     xinput --disable "$TRACKPOINT_NAME"
     xinput --disable "$KEYBOARD_NAME"
     xinput --enable "$TOUCHPAD_NAME"
+    xinput set-prop "$TOUCHPAD_NAME" 335 0
 fi
