@@ -1,100 +1,134 @@
 # The Ugly TODO
 
+# form thoughts:
+* group fields should generate \_\_all__ validation rules
+    * like at_least, no_more_than etc, based on their child fields and kwargs passed to them
+    * when generating these rules it should grab the group's child fields and include them
 
-## Nagging issues
-- railrode not being generated in create_new_map flow because of off-by-one boundary error I think
-    - probably want to handle getting and creating non-existing locations in a more holistic way
-- actions: fix icons
-- numberfield maximum 0 needs to check for !== null
+# Alpha
 
+## bugs
+* building damage overwriting old damage?
 
-## Bugs
-- sign in
-    - what's going on there
-- ticks
-    - make sure new character generation / train is working still
+## tech debt
+* don't forget to remove django silk!!!!
 
+## current
+* inventory
+* woodcutting
+
+## UI
+### mobile fiddling
+* action button smaller, remove button below (I guess? maybe ask)
+* smaller tilesize options
+* SLOW
+* some way to open sidebar easier?
+
+### light mode is broken
+* tabs
+
+## Needs finishing
+### Edge of map
+* make it not break everything at least
+
+### conflict
+* make yell + cower work
+* allow for choices to disengage from conflict
+
+### foraging
+* add a few more events
+
+### woodcutting
+* make real
+
+### prospecting
+* make real
+
+### onboarding
+* flesh out goods and inventory setting
+* finish prose
+* add some version of a "quest" that you can return to and check the progress of
+    * let it be hack it's fine
+
+# POST alpha
+
+## upgrades
+### settings
+* save some settings, like dark mode, to session to grab them immediately
+    * can't trust any of them too much, but I guess that's nothing new
+### location detail
+* d3 ground?
+### forms
+* actually use a single handle method
+    * account for 500 vs 400
+    * have a default error alert
+    * are we handling __all__ resource validation in all cases
+### text
+* 'node' and 'scene' as the names of the two main context scopes is weird and unhelpful.
+    * I don't remember what a scene is immediately
+    * node / page?
+
+## QUESTS
+* quest model (scenario type??)
+* quest marker
+* all of the other shit
 
 ## conflict
-- log
-    - display
-    - writing to log
-- costs
-    - how to handle displaying costs, applies to all resourceforms
-        - tooltips is the best guess so far
-- applying abilities
-- loot
-- skill gain
-- ending
-    - communicating end to parent scenario if exists
+* target and ability field displays
+    * abilities:
+        * display all of the important information like costs
+    * targets
+        * take another pass at top level data
+        * allow for some way to see more detailed data
+* skill gain -- (can be formalized more)
+* ending -- (can be formalized more)
+    * communicating end to parent scenario if exists
 
 
-## Alpha
-- buildings
-    - finalize data model / relationships
-    - add action support around building them
-    - drawing them to the map, or at least some kind of display
-- location details
-    - make the location stats do literally anything, at least display them
-    - display other characters nearby
-    - display buildings correctly
-- ticks
-    - make them update char spirit
-- enough content to support a basic loop
-- ailments
-    - if only just the base sickness
-- ?? station to town onboarding adventure
-    - move intro station away from town. introduction takes place in the space between them
-    - pathfind between them I guess
-    - maybe some baseline implementation of regions?
-- ?? Quests
-    - fixed to start
-    - just like, build a thing in town or something
+
+### ??
+* advanced station to town onboarding adventure
+    * move intro station away from town. introduction takes place in the space between them
+    * pathfind between them I guess
+    * maybe some baseline implementation of regions?
+* ?? Quests
+    * fixed to start
+    * just like, build a thing in town or something
 
 
 ## Nice to have improvements
-- Feedback on skill increases
-    - flash message let me know I can now do new things (new recipes / skill unlocks)
-- equipment
-    - equiping them
-    ? creating them
-- redo sidebar to account for equipment and future things
-
-
-## tech debt
-- pathfinder
-    -turn list items into objects instead of just tuples (or whatever they are now)
-        - you can now serialize them easier and I bet it'll clean up that whole thing
-- names
-    - standardize "get_render_data" "get_json" "get_render_json" (probably the latter)
+* Feedback on skill increases
+    * flash message let me know I can now do new things (new recipes / skill unlocks)
 
 
 ## ideas not yet prioritized
-- Town
-    - NPCs?
-- Death
-    - user-level upgrades / xp
-    - class unlocking
-    - user-level events to handle this?
-- dynamic map location detail
-    - sights defined by skills
-- Regions / roads / mountains
-    - make these a thing
-    - model
-    - roads
-        - take a path, verify it's contiguous
-        - do shit like track safety, etc
+* Towns
+    * NPCs?
+* dynamic map location detail
+    * sights defined by skills
+* Regions (roads / mountains / lakes / etc)
+    * make these a thing
+    * model
+    * roads
+        * take a path, verify it's contiguous
+        * do shit like track safety, etc
     -mountains
-        - pathfind out what is connected
-- Sub locations
-    - like caves, towns(?) or old ruins
-    - real-time?
-    - can be "owned" ??
-- Quests
-    - dynamic, based on world sim
+        * pathfind out what is connected
+* Sub locations
+    * like caves, towns(?) or old ruins
+    * real-time?
+    * can be "owned" ??
+* Quests
+    * dynamic, based on world sim
+* hidden ability settings
+    * setting class created but thats all
 
 
-## needs more thought
-- pick-me-ups
-- ailments
-- world sim
+## barely an idea yet
+* pick-me-ups
+* ailments
+* world sim
+### dynamic chat
+* use game mechanics within game chat
+* "pull rank" ability you can do while chatting with them. has some effect
+* ability to scream or be quiet. other players may be able to hear?

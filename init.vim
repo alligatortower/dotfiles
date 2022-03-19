@@ -34,7 +34,6 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rhysd/clever-f.vim'
-Plug 'rking/ag.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -43,7 +42,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fmoralesc/Vim-pad'  " throwing insert mode mapping error on start
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -53,14 +52,6 @@ Plug 'pelodelfuego/vim-swoop'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'chrisbra/Colorizer'
-" Plug 'Floobits/floobits-neovim'
-Plug 'KabbAmine/zeavim.vim', {'on': [
-			\	'Zeavim', 'Docset',
-			\	'<Plug>Zeavim',
-			\	'<Plug>ZVVisSelection',
-			\	'<Plug>ZVKeyDocset',
-			\	'<Plug>ZVMotion'
-			\ ]}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 "misc
@@ -81,8 +72,6 @@ else
 endif
 call plug#end()
 
-let g:deoplete#enable_at_startup = 1
-
 
 """""""""""
 " DISPLAY "
@@ -102,6 +91,33 @@ set laststatus=2
 if has('nvim') || has('termguicolors')
   set termguicolors
 endif
+" tmux needs this to be happy
+
+"""""""""""""""""
+" AUTO COMMANDS "
+"""""""""""""""""
+let g:followCursor = 0
+
+function! ToggleFollowCursor()
+    " Switch the toggle variable
+    let g:followCursor = !get(g:, 'followCursor', 1)
+
+    " Enable if toggled on
+    if g:followCursor
+        augroup FollowCursor
+        au!
+        au VimEnter,WinEnter,BufWinEnter * setlocal cursorline | setlocal cursorcolumn
+        au WinLeave * setlocal nocursorline | setlocal nocursorcolumn
+        augroup END
+        setlocal cursorline | setlocal cursorcolumn
+    " reset and disable options
+    else
+        augroup FollowCursor
+            autocmd!
+        augroup END
+        setlocal nocursorline | setlocal nocursorcolumn
+    endif
+endfunction
 
 """""""""""""""""
 " MISC SETTINGS "
@@ -119,11 +135,11 @@ set hidden
 "quicker updates
 set updatetime=250
 "start scroll when one line from top or bottom
-set scrolloff=1
+set scrolloff=2
 "linenumbers on by default
 set nu
 "time to wait for next key in sequence
-set timeoutlen=300
+set timeoutlen=400
 
 let g:python3_host_prog = '/usr/bin/python3'
 
@@ -137,6 +153,7 @@ filetype plugin on
 set shiftround
 set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
+autocmd FileType c setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype html.handlebars setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
@@ -180,6 +197,9 @@ map <F4> :set nonu<CR>
 "remap K to inverse of J
 " noremap K a<CR><ESC>
 
+" autocmd
+nnoremap <leader>f :call ToggleFollowCursor()<CR>
+
 
 """"""""""""""""""
 " PLUGIN KEYMAPS "
@@ -190,17 +210,14 @@ map <leader>t :NERDTreeToggle<CR>
 map <leader>o :CtrlPMixed<CR>
 "open undotree
 nnoremap <F5> :UndotreeToggle<cr>
-"yankstack
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
 nmap <leader>ss<leader> *g:pad#maps#incsearch*
 "fzf
 nmap <leader>a :Ag<space>
 " vim-jedi
-let g:jedi#goto_command = "<leader>jd"
+let g:jedi#goto_command = "<leader>jc"
 let g:jedi#goto_assignments_command = "<leader>jg"
 let g:jedi#goto_stubs_command = "<leader>js"
-let g:jedi#goto_definitions_command = ""
+let g:jedi#goto_definitions_command = "<leader>jd"
 let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"

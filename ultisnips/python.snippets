@@ -1,7 +1,3 @@
-snippet ipdb "debug" b
-import ipdb; ipdb.set_trace()
-endsnippet
-
 snippet heading "heading" b
 `!p
 length = len(t[1]) + 4
@@ -37,7 +33,8 @@ if args:
     for arg in args.split(", "):
 		if "=" in arg:
 			arg = arg.split("=")[0]
-        assign.append(f"    self.{arg} = {arg}\n")
+        assign.append(f"self.{arg} = {arg}\n")
+	assign = [f'        {statement}' if index else f'    {statement}'for index, statement in enumerate(assign)]
 	snip.rv = ''.join(assign)
 `
 endsnippet

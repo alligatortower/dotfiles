@@ -1,7 +1,8 @@
 # Path to your oh-my-zsh installation.
 # [[ $TERM != "screen" ]] && exec tmux
 export ZSH=/home/cweed/.oh-my-zsh
-export TERM=xterm-256color
+# export TERM=xterm-256color
+# export TERM=screen-256color
 # hack to make weird debug logs go away
 export PYTHONSTARTUP="$HOME/pythonstartup.py"
 
@@ -9,7 +10,12 @@ export PYTHONSTARTUP="$HOME/pythonstartup.py"
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="kphoen"
+# ZSH_THEME="kphoen"
+
+fpath+=$HOME/.zsh/pure
+autoload -U promptinit; promptinit
+prompt pure
+
 
 # use dir_colors
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
@@ -59,7 +65,6 @@ plugins=(
 battery
 coffee
 cp
-django
 fabric
 git
 git-extras
@@ -117,11 +122,13 @@ export PATH=$HOME/.local/bin:$PATH
 export GOPATH=~/go
 alias ag='ag --hidden'
 alias swampremote='ssh -X swamp x2x -west -to :0'
-alias sp='./manage.py shell_plus'
+alias sp='./manage.py shell_plus --ipython'
+alias rs='./manage.py runserver'
 
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
 source /home/cweed/.local/bin/virtualenvwrapper.sh
+export QMK_HOME="/home/cweed/keyboard_stuff/qmk_firmware"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -137,3 +144,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$PATH:/opt/mssql-tools/bin"
+
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+    tmux attach -t default || tmux new -s default
+fi

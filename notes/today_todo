@@ -1,0 +1,45 @@
+# Today todo:
+
+## Woodcutting
+
+* search for trees event
+    * title and dressing
+    * [x] hide resources if there are none
+    * __random chances to find stuff__
+        * find trees
+        * find thing that increases spirit cost
+        * ~~find conflict (not for alpha)~~
+    * you found [whatever] do you want to examine details?
+        * maybe a cost to examining?
+        * some wiff of how good it is beforehand?
+* tree details event
+    * title and dressing
+    * see quality level
+    * chop
+        * __takes indeterminate time__
+            * you get more information skill vs ql
+        * eventually it is felled
+            * chance to lower ql on falling
+        * becomes felled tree event
+    * can return to searching
+* felled tree details event
+    * title and dressing
+    * see ql
+    * chop
+        * __spirit depends on skill vs ql__
+        * creates logs, but chance to lower ql
+    * can return to searching
+* and on and on forever that's it I guess?
+
+
+## Single page prose
+* new parser
+* ??
+## Single page prose -- thinking
+* get rid of original Prose class?
+    * yeaaaah
+* make a new parser class that's simpler?
+    * no file loading?
+    * or maybe you just give it a single file?
+    * can it link to other nodes?
+        * lets assume no unless that's trivial

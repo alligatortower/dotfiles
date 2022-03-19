@@ -1,24 +1,14 @@
 Vim to learn:
 
-Topics:
-Registers
-
-insert
+## insert
 
 :r ![cmd / file] --> write stdout of cmd or file to buffer
 "gi" return to last insert
-^t / ^d --> tab / untab
 
-navigation
-
-** USE THIS DAMMIT **
-<C-o> / <C-i> go back/forward in "jumps"
-*************
+## navigation
 
 "zt" cursor top
 "zb" cursor bottom
-"m{key}" bookmark cursor
-"`{key}" go to bookmark
 |zN<CR>|	z{height}<CR>	   redraw, make window {height} lines high
 |zf|		zf{motion}	   create a fold for Nmove text
 |za|		za		   open a closed fold, close an open fold
