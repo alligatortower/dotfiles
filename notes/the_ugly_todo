@@ -2,8 +2,11 @@
 
 # form thoughts:
 * group fields should generate \_\_all__ validation rules
+    * this is working now but only in a few cases. scaffolding is there at least
     * like at_least, no_more_than etc, based on their child fields and kwargs passed to them
     * when generating these rules it should grab the group's child fields and include them
+* formwide submit button could be its own section composed within other layout sections e.g ["*", DEFAULT, SUBMIT]
+    * could do the same with formwide provides / needs / gives too
 
 # Alpha
 
@@ -32,6 +35,7 @@
 * make it not break everything at least
 
 ### conflict
+* set function change probably fucked everything tbh
 * make yell + cower work
 * allow for choices to disengage from conflict
 
@@ -59,10 +63,12 @@
 ### location detail
 * d3 ground?
 ### forms
-* actually use a single handle method
+* actually use a single handler function in FE submit response handling e.g. if the server returns a 500 show this notication in all cases
     * account for 500 vs 400
     * have a default error alert
     * are we handling __all__ resource validation in all cases
+* form errors do not set validation errors correctly
+    * either merge the server errors with the existing FE ones, or set correctly on BE
 ### text
 * 'node' and 'scene' as the names of the two main context scopes is weird and unhelpful.
     * I don't remember what a scene is immediately
