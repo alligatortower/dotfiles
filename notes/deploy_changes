@@ -1,7 +1,0 @@
-# deploy changes
-- move to modules.
-- move to dev
-- need to update deploy script
-- need to add bucket
-- make deploy/logs dir
-- update deploy-packer to take ami

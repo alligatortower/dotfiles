@@ -1,11 +1,8 @@
 # Path to your oh-my-zsh installation.
-# [[ $TERM != "screen" ]] && exec tmux
 export ZSH=/home/cweed/.oh-my-zsh
-# export TERM=xterm-256color
-# export TERM=screen-256color
 # hack to make weird debug logs go away
 export PYTHONSTARTUP="$HOME/pythonstartup.py"
-
+export PYTHONBREAKPOINT="pudb.set_trace"
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -17,6 +14,7 @@ autoload -U promptinit; promptinit
 prompt pure
 
 
+eval "$(direnv hook zsh)"
 # use dir_colors
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 autoload -Uz compinit

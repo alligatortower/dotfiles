@@ -1,24 +1,11 @@
 # The Ugly TODO
 
-# form thoughts:
-* group fields should generate \_\_all__ validation rules
-    * this is working now but only in a few cases. scaffolding is there at least
-    * like at_least, no_more_than etc, based on their child fields and kwargs passed to them
-    * when generating these rules it should grab the group's child fields and include them
-* formwide submit button could be its own section composed within other layout sections e.g ["*", DEFAULT, SUBMIT]
-    * could do the same with formwide provides / needs / gives too
+* don't forget to remove django silk!!!!
 
 # Alpha
 
 ## bugs
-* building damage overwriting old damage?
-
-## tech debt
-* don't forget to remove django silk!!!!
-
-## current
-* inventory
-* woodcutting
+ building damage overwriting old damage?
 
 ## UI
 ### mobile fiddling
@@ -27,28 +14,35 @@
 * SLOW
 * some way to open sidebar easier?
 
-### light mode is broken
-* tabs
-
 ## Needs finishing
-### Edge of map
-* make it not break everything at least
+### forms
+* actually use a single handler function in FE submit response handling e.g. if the server returns a 500 show this notication in all cases
+    * account for 500 vs 400
+    * have a default error alert
 
-### conflict
-* set function change probably fucked everything tbh
-* make yell + cower work
-* allow for choices to disengage from conflict
+### create items
+* item field slots by tags
+    * and tags in general honestly
 
+### maintenance forms
+* need actual sane values for costs
+* need to reward the correct skills
+* items
+* paths
+* buildings probably
+
+## Notables
 ### foraging
-* add a few more events
-
+* translate old stuff into notables
 ### woodcutting
-* make real
-
+* finalize notables
 ### prospecting
-* make real
+* create notables
+### general
+* overlay on top of the map for notable types
+    * If just so we can highlight the alpha-quest notable
 
-### onboarding
+## Onboarding
 * flesh out goods and inventory setting
 * finish prose
 * add some version of a "quest" that you can return to and check the progress of
@@ -56,7 +50,22 @@
 
 # POST alpha
 
+## DE-PRIORITIZED
+### light mode is broken
+* just in general everywhere, honestly
+* tabs
+### conflict
+* set function change probably fucked everything tbh
+* make yell + cower work
+* allow for choices to disengage from conflict
+
 ## upgrades
+### speed
+* scenarios
+    * event submit returns map data.
+        * map may have changed, but we don't need the updated data immediately
+        * consider not returning it as part of event response payload
+        * also consider a more global "either return scenario or map" when fresh loading (from `upcoming/`)
 ### settings
 * save some settings, like dark mode, to session to grab them immediately
     * can't trust any of them too much, but I guess that's nothing new
@@ -73,6 +82,15 @@
 * 'node' and 'scene' as the names of the two main context scopes is weird and unhelpful.
     * I don't remember what a scene is immediately
     * node / page?
+
+## form thoughts:
+* group fields should generate \_\_all__ validation rules
+    * this is working now but only in a few cases. scaffolding is there at least
+    * like at_least, no_more_than etc, based on their child fields and kwargs passed to them
+    * when generating these rules it should grab the group's child fields and include them
+* formwide submit button could be its own section composed within other layout sections e.g ["*", DEFAULT, SUBMIT]
+    * could do the same with formwide provides / needs / gives too
+
 
 ## QUESTS
 * quest model (scenario type??)
@@ -100,6 +118,8 @@
 * ?? Quests
     * fixed to start
     * just like, build a thing in town or something
+* dignity
+    * should be a status, idk
 
 
 ## Nice to have improvements
@@ -126,8 +146,6 @@
     * can be "owned" ??
 * Quests
     * dynamic, based on world sim
-* hidden ability settings
-    * setting class created but thats all
 
 
 ## barely an idea yet

@@ -1,5 +1,0 @@
-# new migrations
-./manage.py migrate wagtailcore
-./manage.py migrate wagtailimages
-./manage.py migrate home 0002 --fake
-./manage.py migrate

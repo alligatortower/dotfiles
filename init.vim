@@ -1,4 +1,4 @@
-"""""""""""
+""""""""""
 " PLUGINS "
 """""""""""
 "colorscheme pet cemetary
@@ -41,7 +41,7 @@ Plug 'tpope/vim-unimpaired'
 "bonus features
 Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fmoralesc/Vim-pad'  " throwing insert mode mapping error on start
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -50,7 +50,8 @@ Plug 'mbbill/undotree'
 Plug 'kshenoy/vim-signature'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+Plug 'dense-analysis/ale'
+Plug 'maximbaz/lightline-ale'
 Plug 'chrisbra/Colorizer'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -206,6 +207,8 @@ nnoremap <leader>f :call ToggleFollowCursor()<CR>
 """"""""""""""""""
 "open nerd tree
 map <leader>t :NERDTreeToggle<CR>
+let NERDTreeMapOpenSplit="s"
+let NERDTreeMapOpenVSplit="v"
 "open ctrlp
 map <leader>o :CtrlPMixed<CR>
 "open undotree
@@ -222,6 +225,15 @@ let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>jr"
+" ale
+nmap <silent> <leader>E <Plug>(ale_previous_wrap)
+nmap <silent> <leader>e <Plug>(ale_next_wrap)
+nnoremap <leader><C-e> :ALEPopulateLocList<cr>
+
+" I think this is old
+" function! ToggleAleList()
+"     let g:ale_open_list = !g:ale_open_list
+" endfunction
 
 
 """""""""""""""""""
@@ -246,25 +258,69 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-
 "[vim-pad]
 let g:pad#dir = '~/dotfiles/notes'
 " height of the buffer that opens
 let g:pad#window_height = 25
 
-"[syntastic]
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ["flake8"]
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_c_checkers = []
+"[gitsigns]
+highlight link GitSignsChangeNr Special
+highlight link GitSignsAddNr Pmenu
+highlight link GitSignsDeleteNr NonText
+lua << EOF
+require('gitsigns').setup{
+    signs = {
+          add          = {numhl='GitSignsAddNr',  },
+          change       = {numhl='GitSignsChangeNr', },
+          delete       = {numhl='GitSignsDeleteNr', },
+          topdelete    = {numhl='GitSignsDeleteNr', },
+          changedelete = {numhl='GitSignsChangeNr', },
+    },
+    numhl = true,
+    signcolumn = false,
+}
+EOF
+autocmd ColorScheme * highlight! link SignColumn Background
 
-"[rainbow parenthesis]
-let g:rainbow_active = 1
+"[ale]
+set signcolumn=number
+let g:ale_linters_explicit = 1
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '◉'
+let g:ale_sign_warning = '◉'
+highlight ALEErrorSign guifg=#FF0000 guibg=dark
+highlight! ALEWarningSign guifg=#FFFF00 guibg=dark
+let g:ale_linters = {
+\    'python': ['flake8', 'pylint'],
+\    'javascript': ['prettier', 'eslint'],
+\    'json': ['jsonlint'],
+\}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['autopep8', 'black'],
+\   'javascript': ['prettier', 'eslint'],
+\   'json': ['fixjson'],
+\}
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
+let g:lightline.active = {
+            \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+            \            [ 'lineinfo' ],
+	    \            [ 'percent' ],
+	    \            [ 'fileformat', 'fileencoding', 'filetype'] ] }
 
 "[ultisnips]
 let g:UltiSnipsExpandTrigger = "<c-j>"
