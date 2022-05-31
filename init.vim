@@ -269,13 +269,6 @@ highlight link GitSignsAddNr Pmenu
 highlight link GitSignsDeleteNr NonText
 lua << EOF
 require('gitsigns').setup{
-    signs = {
-          add          = {numhl='GitSignsAddNr',  },
-          change       = {numhl='GitSignsChangeNr', },
-          delete       = {numhl='GitSignsDeleteNr', },
-          topdelete    = {numhl='GitSignsDeleteNr', },
-          changedelete = {numhl='GitSignsChangeNr', },
-    },
     numhl = true,
     signcolumn = false,
 }

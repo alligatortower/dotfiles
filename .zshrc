@@ -123,9 +123,6 @@ alias swampremote='ssh -X swamp x2x -west -to :0'
 alias sp='./manage.py shell_plus --ipython'
 alias rs='./manage.py runserver'
 
-VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export WORKON_HOME=$HOME/.virtualenvs
-source /home/cweed/.local/bin/virtualenvwrapper.sh
 export QMK_HOME="/home/cweed/keyboard_stuff/qmk_firmware"
 
 ### Added by the Heroku Toolbelt
