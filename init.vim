@@ -284,7 +284,7 @@ let g:ale_sign_warning = '◉'
 highlight ALEErrorSign guifg=#FF0000 guibg=dark
 highlight! ALEWarningSign guifg=#FFFF00 guibg=dark
 let g:ale_linters = {
-\    'python': ['flake8', 'pylint'],
+\    'python': ['flake8', 'pylint', 'mypy'],
 \    'javascript': ['prettier', 'eslint'],
 \    'json': ['jsonlint'],
 \}

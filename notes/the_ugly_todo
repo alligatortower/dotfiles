@@ -54,10 +54,6 @@
 ### light mode is broken
 * just in general everywhere, honestly
 * tabs
-### conflict
-* set function change probably fucked everything tbh
-* make yell + cower work
-* allow for choices to disengage from conflict
 
 ## upgrades
 ### speed
@@ -97,13 +93,6 @@
 * quest marker
 * all of the other shit
 
-## conflict
-* target and ability field displays
-    * abilities:
-        * display all of the important information like costs
-    * targets
-        * take another pass at top level data
-        * allow for some way to see more detailed data
 * skill gain -- (can be formalized more)
 * ending -- (can be formalized more)
     * communicating end to parent scenario if exists
