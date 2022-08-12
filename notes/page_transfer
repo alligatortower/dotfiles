@@ -1,0 +1,87 @@
+# Page Transfer
+https://github.com/wagtail/wagtail-transfer
+
+This functionality lets you do a few related but meaningfully different things
+1. Transfer pages between environments.
+2. Transfer snippets (e.g. alerts, web footers)
+3. Transfer changes (to pages or snippets), which will overwrite the version of the page you currently have
+
+#### NOTE: Transfering is a potentially destructive action
+When dealing with #3 above, the data in the page or snippet will be **overwritten**
+
+#### Transfer Direction
+All transfers happen TO the environment you're currently on. E.G. if you log into staging, you will be transfering TO staging.  If you want to transfer to prod, you need to log into prod.  Transfering does not change anything on the environment you transfer FROM.  If you want to transfer to staging from prod, staging will need to be "aware" of prod. See "Transfering Between Environments" below
+
+## Implemention Nuances
+
+#### Installed and migrated on TO and FROM environments
+In order to transfer, all involved Athena environments need to be running this code. E.G. in order to transfer between staging and prod in either direction, both environments need to be running this code.
+
+#### Environment you're transfering TO needs to be aware of the environment you wish to transfer FROM
+See: *Transfering Between Environments* below
+
+#### Transfering changes (#3 above) instead of entire pages
+For page transfer to "see" the page you're transfering as changes to a page you already have, and not an entirely new page, the two pages need to share a UUID.  New pages craated after the page-transfer code is merged will be created with a UUID. Pages created prior to the merge will need to have a UUID generated for them. This can be done by running a management command.
+My suggestion is to run this command against prod, once the code has made it to release. Then refresh other envs with the prod data. This is the cleanest and least error prone way of insuring that existing pages all share the same UUID -- all generated a single time by the prod env.
+
+
+## TAQ (Tom Asked Questions)
+### Transfering Between Environments
+To transfer, the Athena environment needs to be aware of the environment you wish to transfer from. E.G. if you wish to transfer a page to staging from prod -- staging needs to have acess to the url and secret key of prod, by way of environment variable, settings variable, response from an endpoint it can query, etc.  Also, as mentioned above, if the pages do not share a UUID, the prod page will be transfered as a new page.
+Full list
+* Page transfer code needs to be on both environments
+* TO envrionment needs to be aware of FROM environment (url + secret key)
+* Pages must share a UUID for the transfer to be seen as a change, and not the transfer of an entirely new page
+
+### Permissions
+* Importing pages or snippets is limited to users with a specific permission
+    * permissiong name: "Can import pages and snippets from other sites"
+* Permission can be granted to user groups (Wagtail admin > Settings > Groups > Add a group) or specific users
+    * superusers (admins) have all permissions
+
+### Good and Bad States
+How do they happen and how to fix them.
+
+NOTE: There is always a chance of data loss whenever mutating data. Transfering pages is always potentially destructive. Page transfer assumes that the page you are transfering from is the single source of truth.
+#### Scenario -- Whoops:
+* A page is transfered from prod to staging
+* The version of the page that was on staging had important changes that were not in prod.
+* After transfering, staging has prod's version of the page, and its changes were overwritten
+
+The rest of the scenarios assume that the transfer is intentional
+
+#### Scenario -- Equivalent:
+* Prod is running 1.5
+* Staging is running 1.5
+* a page is transferred from prod to staging
+
+*potential problems*
+* We do not expect any issues specific to page transfering
+    * We expect this to function similarly to having just built or edited the page on staging directly
+
+#### Scenario -- From Older:
+* Prod is running 1.5
+* Staging is running 1.6
+* a page is transferred from prod to staging
+
+*potential problems*
+* We do not expect any issues specific to page transfering
+    * We expect this to behave like updating the code on an instance. Rarely, this can result in bugs, but these bugs will appear when the code is updated, regardless of page transfer.
+        * Specifically, if `CardA.widget` was a `CharBlock` in 1.5 but is now an `IntBlock` in 1.6, the string data, which was saved from the older version of the `CardA` might raise an exception when given to the new version of `CardA` which expects an int
+    * Page transfer may however, surface these bugs earlier
+
+#### Scenario -- From Newer:
+* Prod is running 1.5
+* Staging is running 1.6
+* a page is transferred from **staging** to **prod**
+
+*potential problems*
+* If a component exists on staging but not on prod:
+    * Wagtail ignores components it does not know about. Athena will function as though this does not exist on the page
+* If a components data signature has a breaking change.
+    * The actual bug is similar to the `CardA` example above (in "From Older").
+    * The difference is that these bugs are not always bi-directional. Meaning, it's possible that it won't show up when upgrading the data, but it will show up when rendering new page data using an older version of the component. In other words, the bug would only show up when transfering pages saved from newer versions of the code. Making this a (with some exceptions) uniquely page transfer bug.
+
+### `update_index` management command
+* Testing locally has been inconclusive. I've had search "just work" after transfering a new page, and also had it not be able to find the new page.
+* I would suggest including running this command in our daily command list

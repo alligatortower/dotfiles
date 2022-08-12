@@ -77,8 +77,7 @@ call plug#end()
 """""""""""
 " DISPLAY "
 """""""""""
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-syntax enable
+set termguicolors
 colorscheme monokai_pro
 let g:lightline = { 'colorscheme': 'monokai_pro' }
 " make comments bright
@@ -89,10 +88,6 @@ set noshowmode
 set laststatus=2
 "whitespace highlighting
 :hi ExtraWhitespace guibg=#990000 ctermbg=red
-if has('nvim') || has('termguicolors')
-  set termguicolors
-endif
-" tmux needs this to be happy
 
 """""""""""""""""
 " AUTO COMMANDS "
@@ -149,8 +144,6 @@ let g:python3_host_prog = '/usr/bin/python3'
 """""""""""""""""""""""""""""""
 " SPACING / FILETYPE SETTINGS "
 """""""""""""""""""""""""""""""
-filetype plugin indent on
-filetype plugin on
 set shiftround
 set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
@@ -161,6 +154,7 @@ autocmd Filetype htmldjango setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype javascriptreact setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype typescriptreact setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype jinja setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype sass setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab
@@ -230,11 +224,6 @@ nmap <silent> <leader>E <Plug>(ale_previous_wrap)
 nmap <silent> <leader>e <Plug>(ale_next_wrap)
 nnoremap <leader><C-e> :ALEPopulateLocList<cr>
 
-" I think this is old
-" function! ToggleAleList()
-"     let g:ale_open_list = !g:ale_open_list
-" endfunction
-
 
 """""""""""""""""""
 " PLUGIN SETTINGS "
@@ -286,12 +275,16 @@ highlight! ALEWarningSign guifg=#FFFF00 guibg=dark
 let g:ale_linters = {
 \    'python': ['flake8', 'pylint', 'mypy'],
 \    'javascript': ['prettier', 'eslint'],
+\    'typescript': ['prettier', 'standard', 'tsserver'],
+\    'typescriptreact': ['prettier', 'standard', 'tsserver'],
 \    'json': ['jsonlint'],
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'python': ['autopep8', 'black'],
 \   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'standard'],
+\   'typescriptreact': ['prettier', 'standard'],
 \   'json': ['fixjson'],
 \}
 

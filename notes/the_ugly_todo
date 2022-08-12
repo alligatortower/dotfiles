@@ -4,6 +4,29 @@
 
 # Alpha
 
+* !! good.current is now a float -- forms need to return invalid for non-divisible good setting
+
+
+## encounters
+* encounter generation
+    * mostly there but needs a once-over
+* being on the same tile as an encounter
+    * allows you to start the encounter
+    * doesn't allow you to move
+* starting an encounter
+    * see the enemies?
+    * choose some stuff?
+* character choices that effect encounters
+    * concerns
+    * strategies?
+    * do you want to run?
+* encounter balance
+    * oh god
+* post encounter
+    * looting!
+    * location details
+
+
 ## bugs
  building damage overwriting old damage?
 
