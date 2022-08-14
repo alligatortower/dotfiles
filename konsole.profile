@@ -2,7 +2,7 @@
 AntiAliasFonts=true
 BoldIntense=true
 ColorScheme=snazzy
-Font=JetBrainsMono Nerd Font Mono,16,-1,5,57,0,0,0,0,0,Medium
+Font=JetBrainsMono Nerd Font Mono,10,-1,5,57,0,0,0,0,0,Medium
 LineSpacing=0
 UseFontLineChararacters=true
 
