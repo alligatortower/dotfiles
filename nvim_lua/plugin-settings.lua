@@ -15,6 +15,7 @@ require("nvim-tree").setup({
 				{ key = { "<C-c>" }, action = "copy", mode = "n" },
 				{ key = { "<C-x>" }, action = "cut", mode = "n" },
 				{ key = { "<C-p>" }, action = "paste", mode = "n" },
+				{ key = { "<C-v>" }, action = "paste", mode = "n" },
 				{ key = { "D" }, action = "remove", mode = "n" },
 				{ key = { "A" }, action = "create", mode = "n" },
 				{ key = { "v" }, action = "vsplit", mode = "n" },

@@ -1,0 +1,7 @@
+news group page questions
+- is there a mock
+- do news cards work currently?
+    - headline becomes the date
+- binding text group (for category headers) to category
+- will categories ever need to be filtered out (except when they're empty)
+- do different platforms need different data
