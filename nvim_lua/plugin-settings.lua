@@ -1,3 +1,4 @@
+require("utils")
 ------------------
 -- PLUGIN SETUP --
 ------------------
@@ -42,8 +43,8 @@ require("gitsigns").setup({
 	numhl = true,
 	signcolumn = false,
 })
-require("utils")
 vim.g.UltiSnipsSnippetDirectories = { HOME .. "/dotfiles/ultisnips" }
+vim.g["pad#dir"] = HOME .. "/dotfiles/notes"
 
 --------------------
 -- PLUGIN KEYMAPS --
@@ -57,7 +58,12 @@ require("telescope").setup({
 	defaults = {
 		mappings = {
 			i = {
-				["<esc>"] = require("telescope.actions").close,
+				["<esc>"] = "close",
+				["<C-z>"] = "delete_buffer",
+				["<C-h>"] = "move_to_top",
+				["<C-k>"] = "move_selection_previous",
+				["<C-j>"] = "move_selection_next",
+				["<C-l>"] = "move_to_bottom",
 			},
 		},
 	},
@@ -159,6 +165,7 @@ local sources = {
 	null_ls.builtins.formatting.stylua,
 	null_ls.builtins.formatting.prettier,
 	null_ls.builtins.formatting.eslint_d,
+	null_ls.builtins.formatting.fixjson,
 }
 
 ---------

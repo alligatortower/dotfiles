@@ -118,6 +118,8 @@ end
 vim.g.mapleader = " "
 -- fastsave
 vim.keymap.set("n", "<Esc><Esc>", ":w<CR>")
+-- fastsavequit
+vim.keymap.set("n", "<Esc><BS>", ":wq<CR>")
 -- qwerty timesave
 vim.keymap.set("i", "jk", "<ESC>")
 -- Y yanks to end of line (consistency with D)
