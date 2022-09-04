@@ -142,10 +142,14 @@ vim.keymap.set("n", "<S-C-k>", "<C-w>-")
 -- line numbers
 vim.keymap.set("n", "<F3>", ":set nu<CR>")
 vim.keymap.set("n", "<F4>", ":set nonu<CR>")
--- remap K to inverse of J
-
 -- autocmd
 vim.keymap.set("n", "<leader>x", toggle_follow_cursor)
+-- move lines
+vim.keymap.set("x", "<Up>", ":m -2<CR>gv=gv")
+vim.keymap.set("x", "<Down>", ":m'>+<CR>gv=gv")
+-- move buffers
+vim.keymap.set("n", "<Right>", ":bnext<CR>")
+vim.keymap.set("n", "<Left>", ":bprevious<CR>")
 
 -- lsp
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)

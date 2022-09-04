@@ -39,6 +39,16 @@ require("nvim-treesitter.configs").setup({
 		disable = { "python", "typescriptreact" },
 	},
 })
+require("treesitter-context").setup({
+	enable = true,
+	patterns = {
+		default = {
+			"class",
+			"function",
+			"method",
+		},
+	},
+})
 require("which-key").setup({})
 require("gitsigns").setup({
 	numhl = true,
@@ -77,6 +87,8 @@ require("telescope").setup({
 telescope = require("telescope.builtin")
 vim.keymap.set("n", "<leader>t", telescope.find_files)
 vim.keymap.set("n", "<leader><leader>t", telescope.buffers)
+vim.keymap.set("n", "<leader>f", telescope.live_grep)
+vim.keymap.set("n", "<leader><leader>f", telescope.grep_string)
 
 -- luasnip
 -- vim.keymap.set({ "i", "s" }, "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)

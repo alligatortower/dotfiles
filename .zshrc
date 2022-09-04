@@ -141,5 +141,5 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$PATH:/opt/mssql-tools/bin"
 
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-    tmux attach -t default || tmux new -s default
+    tmux attach -t 0 || tmux new -s 0
 fi

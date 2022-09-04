@@ -1,0 +1,28 @@
+snippet rfc "React Functional Component" b
+type $1Props = {
+`!p
+args = t[2]
+if args:
+	assign = []
+	for arg in args.split(", "):
+		if "=" in arg:
+			arg = arg.split("=")[0]
+		arg = arg.strip()
+		assign.append(f" 	{arg}: boolean;\n")
+	snip.rv = ''.join(assign)
+`}
+
+function ${1:`!v expand('%:t:r')`}({ $2 }: $1Props) {
+	$0
+	return (
+	);
+}
+
+export default $1;
+endsnippet
+
+snippet ue "useEffect" b
+useEffect(() => {
+	$0
+}, [])
+endsnippet
