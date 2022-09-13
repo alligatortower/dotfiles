@@ -29,6 +29,11 @@ require("nvim-tree").setup({
 	filters = {
 		dotfiles = true,
 	},
+	renderer = {
+		icons = {
+			git_placement = "after",
+		},
+	},
 })
 require("nvim-treesitter.configs").setup({
 	highlight = {
@@ -56,6 +61,13 @@ require("gitsigns").setup({
 })
 vim.g.UltiSnipsSnippetDirectories = { HOME .. "/dotfiles/ultisnips" }
 vim.g["pad#dir"] = HOME .. "/dotfiles/notes"
+
+---------------------
+-- NvimTree Colors --
+---------------------
+vim.cmd([[
+  highlight link NvimTreeOpenedFolderName Number
+]])
 
 --------------------
 -- PLUGIN KEYMAPS --
