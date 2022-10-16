@@ -59,6 +59,18 @@ require("gitsigns").setup({
 	numhl = true,
 	signcolumn = false,
 })
+
+require("nvim-lsp-installer").setup({
+	automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+	ui = {
+		icons = {
+			server_installed = "✓",
+			server_pending = "➜",
+			server_uninstalled = "✗",
+		},
+	},
+})
+
 vim.g.UltiSnipsSnippetDirectories = { HOME .. "/dotfiles/ultisnips" }
 vim.g["pad#dir"] = HOME .. "/dotfiles/notes"
 
@@ -251,5 +263,8 @@ require("lspconfig")["pyright"].setup({
 	on_attach = on_lsp_attach,
 })
 require("lspconfig")["tsserver"].setup({
+	on_attach = on_lsp_attach,
+})
+require("lspconfig")["tailwindcss"].setup({
 	on_attach = on_lsp_attach,
 })

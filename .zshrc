@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/cweed/.oh-my-zsh
 # hack to make weird debug logs go away
-export PYTHONSTARTUP="$HOME/pythonstartup.py"
+# export PYTHONSTARTUP="$HOME/pythonstartup.py"
 export PYTHONBREAKPOINT="pudb.set_trace"
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -91,12 +91,7 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -114,11 +109,20 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias tmux0='tmux a -t 0'
+alias tmux1='tmux a -t 1'
+alias tmux2='tmux a -t 2'
+alias tmux3='tmux a -t 3'
+alias tmux4='tmux a -t 4'
+alias nautilus='nautilus --no-desktop'
 export ATH=/usr/local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$HOME/.local/bin:$PATH
 export GOPATH=~/go
 alias ag='ag --hidden'
+if [[ $TERM == "xterm-kitty" ]]; then
+    alias ssh="kitty +kitten ssh"
+fi
 alias swampremote='ssh -X swamp x2x -west -to :0'
 alias sp='./manage.py shell_plus --ipython'
 alias rs='./manage.py runserver'
@@ -140,6 +144,17 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="$PATH:/opt/mssql-tools/bin"
 
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-    tmux attach -t 0 || tmux new -s 0
+# Auto start tmux
+
+# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+#     tmux attach -t 0 || tmux new -s 0
+# fi
+if [ "$TMUX" ]; then
+    toilet --font smblock  "tmux ( `tmux display-message -p '#S'` )"
+fi
+
+if [[ $1 == eval ]]
+then
+    "$@"
+set --
 fi
