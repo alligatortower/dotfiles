@@ -52,7 +52,7 @@ require("packer").startup(function(use)
 	use("kshenoy/vim-signature")
 	use({ "iamcco/markdown-preview.nvim", run = "cd app & yarn install" })
 	-- misc
-	use("stevearc/vim-arduino")
+    use("stevearc/vim-arduino")
 	use("MarcWeber/vim-addon-mw-utils")
 	use("tomtom/tlib_vim")
 end)

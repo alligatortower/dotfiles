@@ -1,0 +1,23 @@
+new ugly todo
+
+# UI functionality
+## buttons / menus
+* maneuvers
+* skills
+    * maybe redesign?
+        * nested?
+        * domains?
+        * affinities?
+    * filters etc
+* goods
+    * filters etc
+* trains
+* paths
+* character
+    * statuses
+    * backgrounds
+
+## sections
+* trains / character switch
+* auth
+* scenarios
