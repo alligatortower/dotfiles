@@ -8,14 +8,6 @@
 
 
 ## encounters
-* encounter generation
-    * mostly there but needs a once-over
-* being on the same tile as an encounter
-    * allows you to start the encounter
-    * doesn't allow you to move
-* starting an encounter
-    * see the enemies?
-    * choose some stuff?
 * character choices that effect encounters
     * concerns
     * strategies?
@@ -30,13 +22,6 @@
 ## bugs
  building damage overwriting old damage?
 
-## UI
-### mobile fiddling
-* action button smaller, remove button below (I guess? maybe ask)
-* smaller tilesize options
-* SLOW
-* some way to open sidebar easier?
-
 ## Needs finishing
 ### forms
 * actually use a single handler function in FE submit response handling e.g. if the server returns a 500 show this notication in all cases
@@ -48,11 +33,10 @@
     * and tags in general honestly
 
 ### maintenance forms
-* need actual sane values for costs
-* need to reward the correct skills
-* items
-* paths
-* buildings probably
+* make sure they all work together:
+    * items
+    * paths
+    * buildings probably
 
 ## Notables
 ### foraging
@@ -72,11 +56,6 @@
 
 # POST alpha
 
-## DE-PRIORITIZED
-### light mode is broken
-* just in general everywhere, honestly
-* tabs
-
 ## upgrades
 ### speed
 * scenarios
@@ -87,8 +66,6 @@
 ### settings
 * save some settings, like dark mode, to session to grab them immediately
     * can't trust any of them too much, but I guess that's nothing new
-### location detail
-* d3 ground?
 ### forms
 * actually use a single handler function in FE submit response handling e.g. if the server returns a 500 show this notication in all cases
     * account for 500 vs 400
@@ -102,13 +79,10 @@
     * node / page?
 
 ## form thoughts:
-* group fields should generate \_\_all__ validation rules
+* group fields should generate `__all__` validation rules
     * this is working now but only in a few cases. scaffolding is there at least
-    * like at_least, no_more_than etc, based on their child fields and kwargs passed to them
+    * like `at_least`, `no_more_than` etc, based on their child fields and kwargs passed to them
     * when generating these rules it should grab the group's child fields and include them
-* formwide submit button could be its own section composed within other layout sections e.g ["*", DEFAULT, SUBMIT]
-    * could do the same with formwide provides / needs / gives too
-
 
 ## QUESTS
 * quest model (scenario type??)

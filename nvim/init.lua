@@ -1,0 +1,5 @@
+require("pack")
+require("settings")
+require("plugins.settings")
+require("keybindings")
+require("lsp")

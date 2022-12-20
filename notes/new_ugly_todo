@@ -9,15 +9,17 @@ new ugly todo
         * domains?
         * affinities?
     * filters etc
-* goods
-    * filters etc
-* trains
 * paths
 * character
     * statuses
     * backgrounds
 
 ## sections
-* trains / character switch
 * auth
+    * flows get stuck and don't move between each other fluidly
 * scenarios
+
+# UI Touchup
+* goods
+    * styling touchup
+* trains
