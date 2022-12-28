@@ -82,20 +82,61 @@ vim.keymap.set("n", "<F6>", ":UltiSnipsEdit<CR>", opts)
 
 -- harpoon
 
--- local harpoon_mark = require("harpoon.mark")
--- local harpoon_ui = require("harpoon.ui")
--- vim.keymap.set("n", "<leader>h", function()
--- 	harpoon_ui.toggle_quick_menu()
--- end)
--- vim.keymap.set("n", "<leader>H", function()
--- 	harpoon_mark.add_file()
--- end)
--- vim.keymap.set("n", "<leader>1", function()
--- 	harpoon_ui.nav_file(1)
--- end)
--- vim.keymap.set("n", "<leader>2", function()
--- 	harpoon_ui.nav_file(2)
--- end)
--- vim.keymap.set("n", "<leader>3", function()
--- 	harpoon_ui.nav_file(3)
--- end)
+local harpoon_mark = require("harpoon.mark")
+local harpoon_ui = require("harpoon.ui")
+vim.keymap.set("n", "<leader>h", function()
+	harpoon_ui.toggle_quick_menu()
+end)
+vim.keymap.set("n", "<leader>H", function()
+	harpoon_mark.add_file()
+end)
+vim.keymap.set("n", "<leader>1", function()
+	harpoon_ui.nav_file(1)
+end)
+vim.keymap.set("n", "<leader>2", function()
+	harpoon_ui.nav_file(2)
+end)
+vim.keymap.set("n", "<leader>3", function()
+	harpoon_ui.nav_file(3)
+end)
+
+-- cmp mappings
+local cmp = require("cmp")
+
+cmp_mappings = {
+	["<Tab>"] = function(fallback)
+		print("wtf")
+		if cmp.visible() then
+			cmp.select_next_item()
+		else
+			fallback()
+		end
+	end,
+	["<S-Tab>"] = function(fallback)
+		if cmp.visible() then
+			cmp.select_prev_item()
+		else
+			fallback()
+		end
+	end,
+	["<C-b>"] = cmp.mapping.scroll_docs(-4),
+	["<C-f>"] = cmp.mapping.scroll_docs(4),
+	["<C-Space>"] = cmp.mapping.complete(),
+	["<C-e>"] = cmp.mapping.abort(),
+	["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+}
+
+-- nvim-tree mappings
+nvim_tree_mappings = {
+	{ key = { "<C-c>" }, action = "copy", mode = "n" },
+	{ key = { "<C-x>" }, action = "cut", mode = "n" },
+	{ key = { "<C-p>" }, action = "paste", mode = "n" },
+	{ key = { "<C-v>" }, action = "paste", mode = "n" },
+	{ key = { "D" }, action = "remove", mode = "n" },
+	{ key = { "A" }, action = "create", mode = "n" },
+	{ key = { "v" }, action = "vsplit", mode = "n" },
+	{ key = { "x" }, action = "split", mode = "n" },
+	{ key = { "t" }, action = "tabnew", mode = "n" },
+	{ key = { "cd" }, action = "cd", mode = "n" },
+	{ key = { "d" }, action = "", mode = "n" },
+}

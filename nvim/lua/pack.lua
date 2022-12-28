@@ -3,7 +3,6 @@ require("packer").startup(function(use)
 
 	use("wbthomason/packer.nvim")
 	-- display
-	-- use("folke/tokyonight.nvim")
 	use("EdenEast/nightfox.nvim")
 	use("rebelot/kanagawa.nvim")
 	use({
@@ -21,10 +20,10 @@ require("packer").startup(function(use)
 	-- tabs
 	use("nanozuki/tabby.nvim")
 	-- core workflow
-	use("kyazdani42/nvim-web-devicons") -- for nvim-tree
 	use({
 		"kyazdani42/nvim-tree.lua",
 		tag = "nightly",
+		requires = { "kyazdani42/nvim-web-devicons" },
 	})
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -41,6 +40,7 @@ require("packer").startup(function(use)
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-context")
 	use("tpope/vim-commentary")
+	use("ThePrimeagen/harpoon")
 	use("tpope/vim-repeat")
 	use("tpope/vim-surround")
 	use("tpope/vim-unimpaired")
@@ -70,6 +70,7 @@ require("packer").startup(function(use)
 	use("fmoralesc/Vim-pad")
 	use("kshenoy/vim-signature")
 	use({ "iamcco/markdown-preview.nvim", run = "cd app & yarn install" })
+	use("romainl/vim-cool") -- auto search highlight removal
 	-- misc
 	use("stevearc/vim-arduino")
 	use("MarcWeber/vim-addon-mw-utils")

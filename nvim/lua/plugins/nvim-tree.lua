@@ -1,3 +1,5 @@
+-- local nvim_tree_mappings = require("keybindings").nvim_tree_mappings
+
 require("nvim-tree").setup({
 	hijack_netrw = true,
 	hijack_directories = {
@@ -6,19 +8,7 @@ require("nvim-tree").setup({
 	},
 	view = {
 		mappings = {
-			list = {
-				{ key = { "<C-c>" }, action = "copy", mode = "n" },
-				{ key = { "<C-x>" }, action = "cut", mode = "n" },
-				{ key = { "<C-p>" }, action = "paste", mode = "n" },
-				{ key = { "<C-v>" }, action = "paste", mode = "n" },
-				{ key = { "D" }, action = "remove", mode = "n" },
-				{ key = { "A" }, action = "create", mode = "n" },
-				{ key = { "v" }, action = "vsplit", mode = "n" },
-				{ key = { "x" }, action = "split", mode = "n" },
-				{ key = { "t" }, action = "tabnew", mode = "n" },
-				{ key = { "cd" }, action = "cd", mode = "n" },
-				{ key = { "d" }, action = "", mode = "n" },
-			},
+			list = nvim_tree_mappings,
 		},
 	},
 	filters = {
