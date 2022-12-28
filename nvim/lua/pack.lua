@@ -2,10 +2,17 @@ require("packer").startup(function(use)
 	vim.cmd([[packadd packer.nvim]])
 
 	use("wbthomason/packer.nvim")
-	-- colorschemes
+	-- display
 	-- use("folke/tokyonight.nvim")
 	use("EdenEast/nightfox.nvim")
 	use("rebelot/kanagawa.nvim")
+	use({
+		"goolord/alpha-nvim",
+		requires = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("alpha").setup(require("plugins.alpha"))
+		end,
+	})
 	-- statusline
 	use({
 		"nvim-lualine/lualine.nvim",
@@ -22,6 +29,13 @@ require("packer").startup(function(use)
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
+	})
+	use({
+		"debugloop/telescope-undo.nvim",
+		requires = { "nvim-telescope/telescope.nvim" },
+		config = function()
+			require("telescope").load_extension("undo")
+		end,
 	})
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -40,8 +54,8 @@ require("packer").startup(function(use)
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
 	})
-	use("neovim/nvim-lspconfig")
-	use("williamboman/nvim-lsp-installer")
+	use({ "neovim/nvim-lspconfig" })
+	use("williamboman/mason.nvim")
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
@@ -54,7 +68,6 @@ require("packer").startup(function(use)
 	use("ggandor/flit.nvim")
 	use("lewis6991/gitsigns.nvim")
 	use("fmoralesc/Vim-pad")
-	use("mbbill/undotree")
 	use("kshenoy/vim-signature")
 	use({ "iamcco/markdown-preview.nvim", run = "cd app & yarn install" })
 	-- misc

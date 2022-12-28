@@ -1,5 +1,6 @@
 require("pack")
 require("settings")
+require("filetype")
 require("plugins.settings")
 require("keybindings")
 require("lsp")

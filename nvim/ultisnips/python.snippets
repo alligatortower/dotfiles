@@ -31,6 +31,8 @@ args = t[1]
 if args:
 	assign = []
     for arg in args.split(", "):
+		if ":" in arg:
+			arg = arg.split(":")[0]
 		if "=" in arg:
 			arg = arg.split("=")[0]
         assign.append(f"self.{arg} = {arg}\n")

@@ -34,56 +34,17 @@ vim.opt.hidden = true
 -- quicker updates
 vim.opt.updatetime = 250
 -- start scroll when one line from top or bottom
-vim.opt.scrolloff = 2
+vim.opt.scrolloff = 3
 -- linenumbers on by default
 vim.opt.nu = true
 -- time to wait for next key in sequence
 vim.opt.timeoutlen = 500
 -- error signs in number gutter
 vim.opt.signcolumn = "number"
--- tab name display
-vim.g.guitablabel = "%t"
-vim.opt.guitablabel = "%t"
+-- always show tabline
+vim.o.showtabline = 2
 
 vim.g.python3_host_prog = "/usr/bin/python3"
-
----------------------------------
--- SPACING / FILETYPE SETTINGS --
----------------------------------
-vim.cmd("filetype plugin indent on")
-vim.opt.shiftround = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lua",
-	command = "setlocal tabstop=2 shiftwidth=2",
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "python",
-	command = "setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4",
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "c",
-	command = "setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2",
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "html", "htmldjango", "jinja" },
-	command = "setlocal tabstop=2 shiftwidth=2 expandtab",
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-	command = "setlocal tabstop=2 shiftwidth=2 expandtab",
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "sass", "scss", "css" },
-	command = "setlocal tabstop=2 shiftwidth=2 expandtab",
-})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "yaml" },
-	command = "setlocal tabstop=2 shiftwidth=2 expandtab",
-})
-vim.g.jsx_ext_required = 0
 
 -------------------
 -- AUTO COMMANDS --

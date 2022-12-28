@@ -79,6 +79,12 @@ _G.packer_plugins = {
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/Vim-pad",
     url = "https://github.com/fmoralesc/Vim-pad"
   },
+  ["alpha-nvim"] = {
+    config = { "\27LJ\2\nM\0\0\5\0\4\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0006\2\0\0'\4\3\0B\2\2\0A\0\0\1K\0\1\0\18plugins.alpha\nsetup\nalpha\frequire\0" },
+    loaded = true,
+    path = "/home/cweed/.local/share/nvim/site/pack/packer/start/alpha-nvim",
+    url = "https://github.com/goolord/alpha-nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -139,6 +145,11 @@ _G.packer_plugins = {
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/home/cweed/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
   ["nightfox.nvim"] = {
     loaded = true,
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
@@ -153,11 +164,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
-  },
-  ["nvim-lsp-installer"] = {
-    loaded = true,
-    path = "/home/cweed/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
-    url = "https://github.com/williamboman/nvim-lsp-installer"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -209,6 +215,12 @@ _G.packer_plugins = {
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
     url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
   },
+  ["telescope-undo.nvim"] = {
+    config = { "\27LJ\2\nI\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\tundo\19load_extension\14telescope\frequire\0" },
+    loaded = true,
+    path = "/home/cweed/.local/share/nvim/site/pack/packer/start/telescope-undo.nvim",
+    url = "https://github.com/debugloop/telescope-undo.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -223,11 +235,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/ultisnips",
     url = "https://github.com/SirVer/ultisnips"
-  },
-  undotree = {
-    loaded = true,
-    path = "/home/cweed/.local/share/nvim/site/pack/packer/start/undotree",
-    url = "https://github.com/mbbill/undotree"
   },
   ["vim-addon-mw-utils"] = {
     loaded = true,
@@ -282,6 +289,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+try_loadstring("\27LJ\2\nM\0\0\5\0\4\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0006\2\0\0'\4\3\0B\2\2\0A\0\0\1K\0\1\0\18plugins.alpha\nsetup\nalpha\frequire\0", "config", "alpha-nvim")
+time([[Config for alpha-nvim]], false)
+-- Config for: telescope-undo.nvim
+time([[Config for telescope-undo.nvim]], true)
+try_loadstring("\27LJ\2\nI\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\tundo\19load_extension\14telescope\frequire\0", "config", "telescope-undo.nvim")
+time([[Config for telescope-undo.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
