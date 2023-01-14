@@ -18,7 +18,9 @@ require("nvim-tree").setup({
 		icons = {
 			git_placement = "after",
 		},
+		highlight_opened_files = "name",
 	},
+	update_focused_file = { enable = true },
 })
 
 vim.cmd([[

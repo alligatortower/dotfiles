@@ -140,3 +140,10 @@ nvim_tree_mappings = {
 	{ key = { "cd" }, action = "cd", mode = "n" },
 	{ key = { "d" }, action = "", mode = "n" },
 }
+
+treesitter_text_object_mappings = {
+	["af"] = "@function.outer",
+	["if"] = "@function.inner",
+	["ac"] = "@class.outer",
+	["ic"] = "@class.inner",
+}

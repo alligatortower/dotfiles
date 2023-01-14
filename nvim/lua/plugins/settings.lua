@@ -6,6 +6,7 @@ require("plugins.tabby")
 -- PLUGIN SETUP --
 ------------------
 require("nvim-web-devicons").setup()
+
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
@@ -14,17 +15,20 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 		disable = { "python", "typescriptreact" },
 	},
-})
-require("treesitter-context").setup({
-	enable = true,
-	patterns = {
-		default = {
-			"class",
-			"function",
-			"method",
+	textobjects = {
+		select = {
+			enable = true,
+			lookahead = true,
+			keymaps = treesitter_text_object_mappings,
+			selection_modes = {
+				["@parameter.outer"] = "v", -- charwise
+				["@function.outer"] = "V", -- linewise
+				["@class.outer"] = "<c-v>", -- blockwise
+			},
 		},
 	},
 })
+
 require("leap").add_default_mappings()
 require("flit").setup({
 	keys = { f = "f", F = "F", t = "t", T = "T" },
