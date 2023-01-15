@@ -3,6 +3,7 @@ require("plugins.cmp")
 require("plugins.nvim-tree")
 require("plugins.tabby")
 require("plugins.leap")
+
 ------------------
 -- PLUGIN SETUP --
 ------------------
@@ -48,16 +49,17 @@ map.setup({
 })
 require("mini.cursorword").setup()
 require("mini.comment").setup()
-require("mini.surround").setup()
+require("mini.surround").setup({
+	mappings = {
+		replace = "sc", -- Replace surrounding
+	},
+})
 
 require("flit").setup({
 	keys = { f = "f", F = "F", t = "t", T = "T" },
 	-- A string like "nv", "nvo", "o", etc.
 	labeled_modes = "v",
 	multiline = true,
-	-- Like `leap`s similar argument (call-specific overrides).
-	-- E.g.: opts = { equivalence_classes = {} }
-	opts = {},
 })
 require("which-key").setup({})
 
