@@ -30,6 +30,24 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
+require("gitsigns").setup({
+	numhl = true,
+	signcolumn = false,
+})
+
+local map = require("mini.map")
+map.setup({
+	integrations = {
+		map.gen_integration.builtin_search(),
+		map.gen_integration.gitsigns(),
+		map.gen_integration.diagnostic(),
+	},
+	window = {
+		show_integration_count = false,
+	},
+})
+require("mini.cursorword").setup()
+require("mini.comment").setup()
 require("mini.surround").setup()
 
 require("flit").setup({
@@ -42,10 +60,6 @@ require("flit").setup({
 	opts = {},
 })
 require("which-key").setup({})
-require("gitsigns").setup({
-	numhl = true,
-	signcolumn = false,
-})
 
 require("mason").setup({
 	ui = {

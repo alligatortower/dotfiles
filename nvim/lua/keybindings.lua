@@ -173,3 +173,16 @@ function get_local_leap_x(opts)
 		["<cr>"] = { leap_in_win, "Leap to letter pair within window", mode = "x", buffer = opts.buf },
 	}
 end
+
+-- mini.map
+local map = require("mini.map")
+vim.keymap.set("n", "<Leader>mc", map.close)
+vim.keymap.set("n", "<Leader>mf", map.toggle_focus)
+vim.keymap.set("n", "<Leader>mo", map.open)
+vim.keymap.set("n", "<Leader>mr", map.refresh)
+vim.keymap.set("n", "<Leader>ms", map.toggle_side)
+vim.keymap.set("n", "<Leader>mt", map.toggle)
+
+for _, key in ipairs({ "n", "N", "*", "#" }) do
+	vim.keymap.set("n", key, key .. "<Cmd>lua MiniMap.refresh({}, {lines = false, scrollbar = false})<CR>")
+end
