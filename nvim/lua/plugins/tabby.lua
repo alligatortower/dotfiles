@@ -5,8 +5,10 @@ local theme = {
 	current = "IncSearch", -- current tab label highlight
 	tab = "Search", -- other tab label highlight
 	win = "StatusLine", -- window highlight
+	unsaved = "ExtraWhiteSpace",
 	tail = "PMenu", -- tail element highlight
 }
+
 local tab_name = function(tab)
 	local cur_win = api.get_tab_current_win(tab.id)
 	if api.is_float_win(cur_win) then
@@ -21,6 +23,7 @@ local tab_name = function(tab)
 		return current_buf_name
 	end
 end
+
 local window_count = function(tab)
 	local win_count = #api.get_tab_wins(tab.id)
 	if win_count == 1 then
@@ -35,24 +38,25 @@ local win_is_modified = function(win)
 end
 
 local tab_is_modified = function(tab)
-	local is_modified = false
 	tab.wins().foreach(function(win)
 		if win_is_modified(win) then
-			is_modified = true
+			return true
 		end
 	end)
-	return is_modified
+	return false
 end
 
 require("tabby.tabline").set(function(line)
 	return {
+		-- head
 		{
 			{ "    ", hl = theme.head },
 			line.sep("", theme.head, theme.fill),
 		},
+		-- tabs
 		line.tabs().foreach(function(tab)
 			local hl = tab.is_current() and theme.current or theme.tab
-			local sepHl = tab_is_modified(tab) and "ExtraWhiteSpace" or hl
+			local sepHl = tab_is_modified(tab) and theme.unsaved or hl
 			return {
 				line.sep("", sepHl, theme.fill),
 				tab.number(),
@@ -64,9 +68,10 @@ require("tabby.tabline").set(function(line)
 			}
 		end),
 		line.spacer(),
+		-- windows
 		line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
 			local hl = win.is_current() and theme.current or theme.tab
-			local sepHl = win_is_modified(win) and "ExtraWhiteSpace" or hl
+			local sepHl = win_is_modified(win) and theme.unsaved or hl
 			return {
 				line.sep("", sepHl, theme.fill),
 				win.buf_name(),
@@ -75,6 +80,7 @@ require("tabby.tabline").set(function(line)
 				margin = " ",
 			}
 		end),
+		-- tail
 		{
 			line.sep("", theme.tail, theme.fill),
 			{ "  ", hl = theme.tail },

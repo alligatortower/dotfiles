@@ -2,6 +2,7 @@ require("utils")
 require("plugins.cmp")
 require("plugins.nvim-tree")
 require("plugins.tabby")
+require("plugins.leap")
 ------------------
 -- PLUGIN SETUP --
 ------------------
@@ -29,7 +30,8 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
-require("leap").add_default_mappings()
+require("mini.surround").setup()
+
 require("flit").setup({
 	keys = { f = "f", F = "F", t = "t", T = "T" },
 	-- A string like "nv", "nvo", "o", etc.

@@ -155,6 +155,11 @@ _G.packer_plugins = {
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["mini.surround"] = {
+    loaded = true,
+    path = "/home/cweed/.local/share/nvim/site/pack/packer/start/mini.surround",
+    url = "https://github.com/echasnovski/mini.surround"
+  },
   ["nightfox.nvim"] = {
     loaded = true,
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
@@ -174,12 +179,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/cweed/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-surround"] = {
-    config = { "\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0" },
-    loaded = true,
-    path = "/home/cweed/.local/share/nvim/site/pack/packer/start/nvim-surround",
-    url = "https://github.com/kylechui/nvim-surround"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -313,10 +312,6 @@ time([[Config for alpha-nvim]], false)
 time([[Config for telescope-undo.nvim]], true)
 try_loadstring("\27LJ\2\nI\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\tundo\19load_extension\14telescope\frequire\0", "config", "telescope-undo.nvim")
 time([[Config for telescope-undo.nvim]], false)
--- Config for: nvim-surround
-time([[Config for nvim-surround]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
-time([[Config for nvim-surround]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

@@ -147,3 +147,29 @@ treesitter_text_object_mappings = {
 	["ac"] = "@class.outer",
 	["ic"] = "@class.inner",
 }
+
+-- leap
+local leap = require("leap")
+local function leap_in_win()
+	leap.leap({ target_windows = { vim.fn.win_getid() } })
+end
+local function leap_anywhere()
+	leap.leap({
+		target_windows = vim.tbl_filter(function(win)
+			return vim.api.nvim_win_get_config(win).focusable
+		end, vim.api.nvim_tabpage_list_wins(0)),
+	})
+end
+
+do_global_leap = { ["g<cr>"] = { leap_anywhere, "Leap to letter pair" } }
+function get_local_leap_n(opts)
+	return { ["<cr>"] = { leap_in_win, "Leap to letter pair within window" }, mode = "n", buffer = opts.buf }
+end
+function get_local_leap_o(opts)
+	return { ["<cr>"] = { leap_in_win, "Leap to letter pair within window" }, mode = "o", buffer = opts.buf }
+end
+function get_local_leap_x(opts)
+	return {
+		["<cr>"] = { leap_in_win, "Leap to letter pair within window", mode = "x", buffer = opts.buf },
+	}
+end
