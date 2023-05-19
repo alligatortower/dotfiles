@@ -1,0 +1,69 @@
+# OLLLLLD The Ugly TODO
+
+* don't forget to remove django silk!!!!
+
+* !! good.current is now a float -- forms need to return invalid for non-divisible good setting
+
+## Notables
+### general
+* overlay on top of the map for notable types
+
+# POST alpha
+
+## upgrades
+### speed
+### forms
+* actually use a single handler function in FE submit response handling e.g. if the server returns a 500 show this notication in all cases
+    * account for 500 vs 400
+    * have a default error alert
+    * are we handling __all__ resource validation in all cases
+* form errors do not set validation errors correctly
+    * either merge the server errors with the existing FE ones, or set correctly on BE
+
+## ARE THESE STILL REAL??????
+* group fields should generate `__all__` validation rules
+    * when generating these rules it should grab the group's child fields and include them
+* scenarios
+    * event submit returns map data.
+        * map may have changed, but we don't need the updated data immediately
+        * consider not returning it as part of event response payload
+        * also consider a more global "either return scenario or map" when fresh loading (from `upcoming/`)
+
+## Objectives
+* quest marker
+* all of the other shit
+
+* ending -- (can be formalized more)
+    * communicating end to parent scenario if exists
+
+
+### LOL RANDOM
+* dignity
+    * should be a status, idk
+
+
+## ideas not yet prioritized
+* Dynamic Towns
+    * NPCs?
+* dynamic map location detail
+    * sights defined by skills
+* Regions (roads / mountains / lakes / etc)
+    * make these a thing
+    * model
+    * roads
+        * take a path, verify it's contiguous
+        * do shit like track safety, etc
+    -mountains
+        * pathfind out what is connected
+* Sub locations
+    * like caves, towns(?) or old ruins
+    * real-time?
+    * can be "owned" ??
+* Dynamic Objectives
+    * dynamic, based on world sim
+
+
+## barely an idea yet
+* pick-me-ups
+* ailments
+* world sim

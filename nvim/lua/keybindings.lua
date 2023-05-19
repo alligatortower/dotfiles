@@ -1,7 +1,7 @@
 -------------
 -- KEYMAPS --
 -------------
-vim.g.mapleader = " "
+-- [mapleader is set in basic-settings]
 -- fastsave
 vim.keymap.set("n", "<Esc><Esc>", ":w<CR>")
 -- fastsavequit
@@ -73,8 +73,11 @@ require("telescope").setup({
 telescope = require("telescope.builtin")
 vim.keymap.set("n", "<leader>t", telescope.find_files)
 vim.keymap.set("n", "<leader><leader>t", telescope.buffers)
+vim.keymap.set("n", "<leader>*", telescope.grep_string)
 vim.keymap.set("n", "<leader>f", telescope.live_grep)
-vim.keymap.set("n", "<leader><leader>f", telescope.grep_string)
+vim.keymap.set("n", "<leader><leader>f", function()
+	telescope.grep_string({ shorten_path = true, word_match = "-w", only_sort_text = true, search = "" })
+end)
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 vim.keymap.set("n", "<leader>o", telescope.oldfiles)
 
@@ -103,9 +106,17 @@ end)
 -- cmp mappings
 local cmp = require("cmp")
 
+-- local has_words_before = function()
+-- 	-- from https://github.com/zbirenbaum/copilot-cmp#tab-completion-configuration-highly-recommended
+-- 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+-- 		return false
+-- 	end
+-- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+-- 	return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+-- end
+
 cmp_mappings = {
 	["<Tab>"] = function(fallback)
-		print("wtf")
 		if cmp.visible() then
 			cmp.select_next_item()
 		else
@@ -127,19 +138,19 @@ cmp_mappings = {
 }
 
 -- nvim-tree mappings
-nvim_tree_mappings = {
-	{ key = { "<C-c>" }, action = "copy", mode = "n" },
-	{ key = { "<C-x>" }, action = "cut", mode = "n" },
-	{ key = { "<C-p>" }, action = "paste", mode = "n" },
-	{ key = { "<C-v>" }, action = "paste", mode = "n" },
-	{ key = { "D" }, action = "remove", mode = "n" },
-	{ key = { "A" }, action = "create", mode = "n" },
-	{ key = { "v" }, action = "vsplit", mode = "n" },
-	{ key = { "x" }, action = "split", mode = "n" },
-	{ key = { "t" }, action = "tabnew", mode = "n" },
-	{ key = { "cd" }, action = "cd", mode = "n" },
-	{ key = { "d" }, action = "", mode = "n" },
-}
+set_custom_nvim_tree_mappings = function(opts)
+	local api = require("nvim-tree.api")
+	vim.keymap.set("n", "<C-c>", api.fs.copy.node, opts("Copy"))
+	vim.keymap.set("n", "<C-x>", api.fs.cut, opts("Cut"))
+	vim.keymap.set("n", "<C-p>", api.fs.paste, opts("Paste"))
+	vim.keymap.set("n", "<C-v>", api.fs.paste, opts("Paste"))
+	vim.keymap.set("n", "D", api.fs.remove, opts("Delete"))
+	vim.keymap.set("n", "A", api.fs.create, opts("Create"))
+	vim.keymap.set("n", "v", api.node.open.vertical, opts("Open: Vertical Split"))
+	vim.keymap.set("n", "x", api.node.open.horizontal, opts("Open: Horizontal Split"))
+	vim.keymap.set("n", "t", api.node.open.tab, opts("Open: New Tab"))
+	vim.keymap.set("n", "cd", api.tree.change_root_to_node, opts("CD"))
+end
 
 treesitter_text_object_mappings = {
 	["af"] = "@function.outer",

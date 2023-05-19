@@ -2,7 +2,7 @@
 export ZSH=/home/cweed/.oh-my-zsh
 # hack to make weird debug logs go away
 # export PYTHONSTARTUP="$HOME/pythonstartup.py"
-export PYTHONBREAKPOINT="pudb.set_trace"
+export PYTHONBREAKPOINT="ipdb.set_trace"
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -114,7 +114,9 @@ alias tmux1='tmux a -t 1'
 alias tmux2='tmux a -t 2'
 alias tmux3='tmux a -t 3'
 alias tmux4='tmux a -t 4'
-alias nautilus='nautilus --no-desktop'
+alias s="bash $HOME/dotfiles/scripts/start.sh"
+alias n="nvim"
+alias v="nvim"
 export ATH=/usr/local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$HOME/.local/bin:$PATH
@@ -158,3 +160,5 @@ then
     "$@"
 set --
 fi
+
+. "$HOME/.cargo/env"

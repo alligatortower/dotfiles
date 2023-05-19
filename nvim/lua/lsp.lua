@@ -4,6 +4,7 @@
 local null_ls = require("null-ls")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local prettier = require("prettier")
+lspconfig = require("lspconfig")
 
 prettier.setup({
 	bin = "prettier", -- or `'prettierd'` (v0.22+)
@@ -78,12 +79,17 @@ null_ls.setup({
 	debug = true,
 	on_attach = on_lsp_attach,
 })
-require("lspconfig")["pyright"].setup({
+
+lspconfig.pyright.setup({
 	on_attach = on_lsp_attach,
 })
-require("lspconfig")["tsserver"].setup({
+lspconfig.tsserver.setup({
 	on_attach = on_lsp_attach,
 })
-require("lspconfig")["tailwindcss"].setup({
+lspconfig.tailwindcss.setup({
+	on_attach = on_lsp_attach,
+})
+lspconfig.rust_analyzer.setup({
+	-- cmd = { "rustup", "run", "stable", "rust-analyzer" },
 	on_attach = on_lsp_attach,
 })

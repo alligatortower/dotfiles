@@ -11,6 +11,7 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert(cmp_mappings),
 	sources = cmp.config.sources({
 		{ name = "ultisnips", priority = 100 },
+		-- { name = "copilot", group_index = 2 },
 		{ name = "nvim_lsp" },
 	}, {
 		{ name = "buffer" },

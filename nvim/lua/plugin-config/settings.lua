@@ -1,22 +1,23 @@
 require("utils")
-require("plugins.cmp")
-require("plugins.nvim-tree")
-require("plugins.tabby")
-require("plugins.leap")
+require("plugin-config.cmp")
+require("plugin-config.nvim-tree")
+require("plugin-config.tabby")
+require("plugin-config.leap")
 
 ------------------
 -- PLUGIN SETUP --
 ------------------
+
 require("nvim-web-devicons").setup()
 
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
 	},
-	indent = {
-		enable = true,
-		disable = { "python", "typescriptreact" },
-	},
+	-- indent = {
+	-- 	enable = true,
+	-- 	disable = { "python", "typescriptreact" },
+	-- },
 	textobjects = {
 		select = {
 			enable = true,
@@ -72,6 +73,7 @@ require("mason").setup({
 		},
 	},
 })
+require("floating-input").setup()
 
 vim.g.UltiSnipsSnippetDirectories = { HOME .. "/dotfiles/nvim/ultisnips" }
 vim.g["pad#dir"] = HOME .. "/dotfiles/notes"
