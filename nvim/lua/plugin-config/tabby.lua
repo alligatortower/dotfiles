@@ -2,10 +2,11 @@ local api = require("tabby.module.api")
 local theme = {
 	fill = "StatusLine", -- tabline background
 	head = "PMenu", -- head element highlight
-	current = "IncSearch", -- current tab label highlight
-	tab = "Search", -- other tab label highlight
+	current = "PMenuThumb", -- current tab label highlight
+	tab = "NormalFloat", -- other tab label highlight
 	win = "StatusLine", -- window highlight
-	unsaved = "ExtraWhiteSpace",
+	unsaved_current = "lualine_a_insert",
+	unsaved = "lualine_b_diff_added_normal",
 	tail = "PMenu", -- tail element highlight
 }
 
@@ -38,12 +39,13 @@ local win_is_modified = function(win)
 end
 
 local tab_is_modified = function(tab)
+	local modified = false
 	tab.wins().foreach(function(win)
 		if win_is_modified(win) then
-			return true
+			modified = true
 		end
 	end)
-	return false
+	return modified
 end
 
 require("tabby.tabline").set(function(line)
@@ -55,14 +57,18 @@ require("tabby.tabline").set(function(line)
 		},
 		-- tabs
 		line.tabs().foreach(function(tab)
-			local hl = tab.is_current() and theme.current or theme.tab
-			local sepHl = tab_is_modified(tab) and theme.unsaved or hl
+			local hl
+			if tab_is_modified(tab) then
+				hl = tab.is_current() and theme.unsaved_current or theme.unsaved
+			else
+				hl = tab.is_current() and theme.current or theme.tab
+			end
 			return {
-				line.sep("", sepHl, theme.fill),
+				line.sep("", hl, theme.fill),
 				tab.number(),
 				tab_name(tab),
 				window_count(tab),
-				line.sep("", sepHl, theme.fill),
+				line.sep("", hl, theme.fill),
 				hl = hl,
 				margin = " ",
 			}
@@ -70,12 +76,16 @@ require("tabby.tabline").set(function(line)
 		line.spacer(),
 		-- windows
 		line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-			local hl = win.is_current() and theme.current or theme.tab
-			local sepHl = win_is_modified(win) and theme.unsaved or hl
+			local hl
+			if win_is_modified(win) then
+				hl = win.is_current() and theme.unsaved_current or theme.unsaved
+			else
+				hl = win.is_current() and theme.current or theme.tab
+			end
 			return {
-				line.sep("", sepHl, theme.fill),
+				line.sep("", hl, theme.fill),
 				win.buf_name(),
-				line.sep("", sepHl, theme.fill),
+				line.sep("", hl, theme.fill),
 				hl = hl,
 				margin = " ",
 			}

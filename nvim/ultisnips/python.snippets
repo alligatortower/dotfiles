@@ -40,3 +40,17 @@ if args:
 	snip.rv = ''.join(assign)
 `
 endsnippet
+
+
+snippet uglyfacet "the ugly GoodFacet" b
+
+@GoodFacet.registry
+class `!p snip.rv = t[1].title() `Facet(GoodFacet):
+    identifier = GoodFacetType.`!p snip.rv = t[1].upper()`
+    display_name = "`!p snip.rv = t[1].title()`"
+    icon = "$1"
+endsnippet
+
+snippet future "future annoations" b
+from __future__ import annotations
+endsnippet

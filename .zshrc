@@ -162,3 +162,9 @@ set --
 fi
 
 . "$HOME/.cargo/env"
+
+export FLYCTL_INSTALL="/home/cweed/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+export DOTNET_ROOT=$HOME/dotnet
+export PATH=$PATH:$HOME/dotnet

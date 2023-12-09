@@ -1,0 +1,57 @@
+# Camps
+## Development
+* Increased in tiers.
+* Once a tier is unlocked it's unlocked forever.
+* The first tier is unlocked when you choose the first location for your camp.
+* Future tiers are unlocked after completing certain achievements.
+    * Achievements will be built out and expanded more.
+    * Maybe a "Get 3 of these 5 achievements" type thing
+    * Not meant to be restrictively blocking.
+        * Early tiers should unlock quickly
+        * Later tiers will take more time, but their improvements will take longer too.
+        * Only once you have robust options for your camp should there be any risk of having to overly grind for certain achievements
+* Each tier includes a list of improvements that reaching it unlocks.
+
+## Improvements
+* Projects unlocked by reaching a certain development tier
+* Require building. Similar to how buildings currently work. Maybe in stages, maybe simpler.
+### improvement Stats
+* Footprint
+    * how much Camp Size it takes up when active
+* Cost to activate
+    * materials and/or time
+    * much lower than the cost to build it originally.
+    * can be set active the first time instantly for free
+* Cost to deactivate
+    * maybe just time
+* [Various services provided, depending on the improvement]
+    * secure storage only you can access
+    * increased stamina regen when one of your characters is in this location
+    * crafting points provided for recipes (like smithing heat)
+    * etc etc.
+
+## Camp Size
+* Max Size
+    * Increased from insights + improvements
+    * Camp size improvements have no footprint and are entirely passive
+* Current Size
+    * Determined by the footprint of all active improvements
+
+## Mobility
+* The ratio of your camp's current size vs your max size.
+* Broken into tiers (light, medium, heavy)
+* Basically ripped from dark souls / elden ring's equip load
+    * e.g. If your current equip load is below 30% of your max, you get the fast tier dodge roll
+* Determines how much it costs (in terms of time and materials) to move your camp to a new location.
+    * At the extreme lightest, maybe a tick or two 
+    * If you're using all of your potential size, it might take a day and a lot of supplies
+    * Perhaps instead of "time and materials" supplies can be used optionally in place of time. But probably not to cover more than half of it. Rich players shouldn't be allowed to teleport their camp (without the appropriate teleportation based risks)
+* Moving would be further modified by how far you want to move your camp.
+    * Probably with a minimum to avoid moving your camp every tick to its neighbor and a maximum to allow you to move several towns over.
+
+## Summary
+* At any time a camp is a collection of active improvements.
+* Those improvements can be added to and activated / disabled with some cost
+* Given enough time a camp focusing on one thing can be converted to one that focuses on something else, provided you've unlocked the necessary improvements
+* A camp with fewer active improvements can be moved more easily than one with lots
+* In all cases (light, medium and heavy mobility), increasing the max size of the camp will increase how many improvements you can have active and maintain the same mobility 

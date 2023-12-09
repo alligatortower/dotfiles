@@ -1,18 +1,15 @@
 -------------
 -- DISPLAY --
 -------------
+-- vim.opt.background = "dark" -- set this to dark or light
+vim.cmd("colorscheme dracula")
 vim.opt.termguicolors = true
-vim.cmd([[colorscheme kanagawa]])
 -- make comments bright
 vim.cmd("hi Comment guifg=#FFA500")
 -- remove -- insert -- now redundent thanks to lightline
 vim.opt.showmode = false
 vim.opt.laststatus = 2
-require("lualine").setup({
-	options = {
-		theme = "kanagawa",
-	},
-})
+require("lualine").setup({})
 
 -- whitespace highlighting
 vim.cmd("hi ExtraWhitespace guibg=#990000 ctermbg=red")

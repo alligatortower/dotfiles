@@ -73,6 +73,8 @@ require("mason").setup({
 		},
 	},
 })
+require("mason-lspconfig").setup()
+
 require("floating-input").setup()
 
 vim.g.UltiSnipsSnippetDirectories = { HOME .. "/dotfiles/nvim/ultisnips" }
@@ -80,3 +82,5 @@ vim.g["pad#dir"] = HOME .. "/dotfiles/notes"
 
 -- Setup lspconfig.
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+require("lsp-file-operations").setup()
